@@ -1,6 +1,10 @@
 defmodule ElixirGoogleScraperWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :elixir_google_scraper
 
+  if Application.get_env(:elixir_google_scraper, :sql_sandbox) do
+    plug Phoenix.Ecto.SQL.Sandbox
+  end
+
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.

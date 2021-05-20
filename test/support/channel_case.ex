@@ -17,11 +17,14 @@ defmodule ElixirGoogleScraperWeb.ChannelCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
       import ElixirGoogleScraperWeb.ChannelCase
+      import ElixirGoogleScraper.Factory
 
       # The default endpoint for testing
       @endpoint ElixirGoogleScraperWeb.Endpoint
@@ -29,10 +32,10 @@ defmodule ElixirGoogleScraperWeb.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(ElixirGoogleScraper.Repo)
+    :ok = Sandbox.checkout(ElixirGoogleScraper.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(ElixirGoogleScraper.Repo, {:shared, self()})
+      Sandbox.mode(ElixirGoogleScraper.Repo, {:shared, self()})
     end
 
     :ok

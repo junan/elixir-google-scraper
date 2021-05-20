@@ -9,9 +9,12 @@ defmodule ElixirGoogleScraperWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  # coveralls-ignore-start
   pipeline :api do
     plug :accepts, ["json"]
   end
+
+  # coveralls-ignore-stop
 
   scope "/", ElixirGoogleScraperWeb do
     pipe_through :browser
@@ -36,7 +39,9 @@ defmodule ElixirGoogleScraperWeb.Router do
 
     scope "/" do
       pipe_through :browser
+      # coveralls-ignore-start
       live_dashboard "/dashboard", metrics: ElixirGoogleScraperWeb.Telemetry
+      # coveralls-ignore-stop
     end
   end
 end

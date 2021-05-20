@@ -10,7 +10,14 @@ defmodule ElixirGoogleScraper.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        lint: :test,
+        coverage: :test,
+        coveralls: :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -25,7 +32,7 @@ defmodule ElixirGoogleScraper.MixProject do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
@@ -33,6 +40,16 @@ defmodule ElixirGoogleScraper.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:wallaby, "~> 0.28.0", [only: :test, runtime: false]},
+      {:sobelow, "~> 0.11.1", [only: [:dev, :test], runtime: false]},
+      {:exvcr, "~> 0.12.3", [only: :test]},
+      {:oban, "~> 2.6.1"},
+      {:mimic, "~> 1.5.0", [only: :test]},
+      {:ex_machina, "~> 2.7.0", [only: :test]},
+      {:excoveralls, "~> 0.14.0", [only: :test]},
+      {:dialyxir, "~> 1.1.0", [only: [:dev], runtime: false]},
+      {:credo, "~> 1.5.5", [only: [:dev, :test], runtime: false]},
+      {:nimble_template, "~> 3.0", only: :dev, runtime: false},
       {:phoenix, "~> 1.5.9"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
@@ -56,10 +73,22 @@ defmodule ElixirGoogleScraper.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
+      "assets.compile": &compile_assets/1,
+      coverage: ["coveralls.html --raise"],
+      codebase: [
+        "deps.unlock --check-unused",
+        "format --check-formatted",
+        "credo --strict",
+        "sobelow --config"
+      ],
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
+  end
+
+  defp compile_assets(_) do
+    Mix.shell().cmd("npm run --prefix assets build:dev", quiet: true)
   end
 end

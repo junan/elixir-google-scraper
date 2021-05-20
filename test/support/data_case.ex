@@ -16,22 +16,27 @@ defmodule ElixirGoogleScraper.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
+      use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+
       alias ElixirGoogleScraper.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
       import ElixirGoogleScraper.DataCase
+      import ElixirGoogleScraper.Factory
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(ElixirGoogleScraper.Repo)
+    :ok = Sandbox.checkout(ElixirGoogleScraper.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(ElixirGoogleScraper.Repo, {:shared, self()})
+      Sandbox.mode(ElixirGoogleScraper.Repo, {:shared, self()})
     end
 
     :ok

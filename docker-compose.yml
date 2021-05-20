@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  build:
+    build:
+      context: .
+      cache_from:
+        - elixir_google_scraper-build
+      target: build
+    image: elixir_google_scraper-build
+
+  app:
+    build:
+      context: .
+      cache_from:
+        - elixir_google_scraper-build
+        - elixir_google_scraper
+      target: app
+    image: elixir_google_scraper

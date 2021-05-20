@@ -17,12 +17,17 @@ defmodule ElixirGoogleScraperWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
+      use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
       import ElixirGoogleScraperWeb.ConnCase
+      import ElixirGoogleScraper.Factory
 
       alias ElixirGoogleScraperWeb.Router.Helpers, as: Routes
 
@@ -32,10 +37,10 @@ defmodule ElixirGoogleScraperWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(ElixirGoogleScraper.Repo)
+    :ok = Sandbox.checkout(ElixirGoogleScraper.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(ElixirGoogleScraper.Repo, {:shared, self()})
+      Sandbox.mode(ElixirGoogleScraper.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

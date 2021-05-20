@@ -14,7 +14,8 @@ defmodule ElixirGoogleScraper.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: ElixirGoogleScraper.PubSub},
       # Start the Endpoint (http/https)
-      ElixirGoogleScraperWeb.Endpoint
+      ElixirGoogleScraperWeb.Endpoint,
+      {Oban, oban_config()}
       # Start a worker by calling: ElixirGoogleScraper.Worker.start_link(arg)
       # {ElixirGoogleScraper.Worker, arg}
     ]
@@ -30,5 +31,10 @@ defmodule ElixirGoogleScraper.Application do
   def config_change(changed, _new, removed) do
     ElixirGoogleScraperWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  # Conditionally disable crontab, queues, or plugins here.
+  defp oban_config do
+    Application.get_env(:elixir_google_scraper, Oban)
   end
 end
