@@ -10,6 +10,11 @@ on:
       - completed
   workflow_dispatch:
 
+env:
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME_PRODUCTION }}
+  HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+
 jobs:
   deploy:
     name: Deploy Production
@@ -27,7 +32,7 @@ jobs:
       - name: Deploy to Heroku production server
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME_PRODUCTION }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ env.HEROKU_API_KEY }}
+          heroku_app_name: ${{ env.HEROKU_APP_NAME }}
+          heroku_email: ${{ env.HEROKU_EMAIL }}
           usedocker: true
