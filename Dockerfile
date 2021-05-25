@@ -22,8 +22,6 @@ ENV MIX_ENV=prod
 
 RUN mix do deps.get, deps.compile, compile
 
-RUN npm install --prefix assets
-
 RUN cd assets && \
   npm ci --progress=false --no-audit --loglevel=error && \
   npm run deploy && \
