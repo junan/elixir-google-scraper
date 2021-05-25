@@ -1,14 +1,6 @@
 name: Deploy Staging
 
-on:
-  workflow_run:
-    workflows:
-      - Test
-    branches:
-      - development
-    types:
-      - completed
-  workflow_dispatch:
+on: push
 
 jobs:
   deploy:
@@ -17,7 +9,7 @@ jobs:
 
     steps:
       - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.6.0
+        uses: styfle/cancel-workflow-action@0.9.0
         with:
           access_token: ${{ github.token }}
 
@@ -26,7 +18,7 @@ jobs:
 
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          branch: 'develop'
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME_STAGING }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          usedocker: true
