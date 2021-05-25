@@ -1,6 +1,14 @@
 name: Deploy Staging
 
-on: push
+on:
+  workflow_run:
+    workflows:
+      - Test
+    branches:
+      - development
+    types:
+      - completed
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -16,6 +24,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Deploy to Heroku staging server
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
