@@ -1,18 +1,23 @@
-[![Build Status](CI_BADGE_URL goes here)](REPO_URL goes here)
+[![Build Status](https://github.com/junan/elixir_google_scraper/actions/workflows/test.yml/badge.svg)](https://github.com/junan/elixir_google_scraper/actions/workflows/test.yml)
 
 ## Introduction
 
-> *App introduction goes here ...*
+A web application to google search with multiple keywords
+
+## Demo
+
+- [Staging](https://elixir-google-scraper-staging.herokuapp.com/)
+- [Production](https://elixir-google-scraper.herokuapp.com/)
 
 ## Project Setup
 
 ### Erlang & Elixir
 
-* Erlang 23.3
+- Erlang 23.3
 
-* Elixir 1.11.4
+- Elixir 1.11.4
 
-* Recommended version manager.
+- Recommended version manager.
 
   - [asdf](https://github.com/asdf-vm/asdf)
   - [asdf-erlang](https://github.com/asdf-vm/asdf-erlang)
@@ -20,59 +25,59 @@
 
 ### Development
 
-* Install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+- Install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
 
-* Setup and boot the Docker containers:
+- Setup and boot the Docker containers:
 
   ```sh
   make docker_setup
   ```
 
-* Install Elixir dependencies:
+- Install Elixir dependencies:
 
   ```sh
   mix deps.get
   ```
 
-* Install Node dependencies:
+- Install Node dependencies:
 
   ```sh
   npm install --prefix assets
   ```
 
-* Setup the databases:
+- Setup the databases:
 
   ```sh
   mix ecto.setup
   ```
 
-* Start the Phoenix app
+- Start the Phoenix app
 
   ```sh
   iex -S mix phx.server
   ```
 
-* Run all tests:
+- Run all tests:
 
   ```sh
-  mix test 
+  mix test
   ```
 
-* Run all lint:
+- Run all lint:
 
   ```sh
-  mix codebase 
+  mix codebase
   ```
-  
-* Test coverage:
+
+- Test coverage:
 
   ```sh
-  mix coverage 
+  mix coverage
   ```
 
 ### Production
 
-* Buidl Docker image
+- Build Docker image
 
   ```sh
   docker-compose build

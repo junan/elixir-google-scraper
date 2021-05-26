@@ -1,16 +1,17 @@
-name: "Tests"
+name: Test
 
-on: pull_request
+on: push
 
 env:
-  OTP_VERSION: "23.3"
-  ELIXIR_VERSION: "1.11.4"
-  NODE_VERSION: "14"
+  OTP_VERSION: 23.3
+  ELIXIR_VERSION: 1.11.4
+  NODE_VERSION: 14
   MIX_ENV: test
   DB_HOST: localhost
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
 
     services:
@@ -31,19 +32,21 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
 
-      - uses: erlef/setup-elixir@v1
+      - name: Setup Elixir
+        uses: erlef/setup-elixir@v1
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
-      
+
       - uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ env.NODE_VERSION }}
-      
+
       - name: Cache Elixir build
         uses: actions/cache@v2
         with:
@@ -53,7 +56,7 @@ jobs:
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-mix-
-      
+
       - name: Cache Node npm
         uses: actions/cache@v2
         with:
@@ -61,20 +64,19 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      
+
       - name: Install Dependencies
         run: mix deps.get
-      
+
       - name: Compile dependencies
         run: mix compile --warnings-as-errors --all-warnings
-      
-      
+
       - name: Install node module
         run: npm --prefix assets install
 
       - name: Compile assets
         run: npm run --prefix assets build:dev
-      
+
       - name: Create database
         run: mix ecto.create
 
@@ -86,10 +88,10 @@ jobs:
 
       - name: Run Tests
         run: mix coverage
-      
-      - uses: actions/upload-artifact@v2
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
         if: ${{ failure() }}
         with:
           name: wallaby_screenshots
           path: tmp/wallaby_screenshots/
-      
