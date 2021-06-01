@@ -83,9 +83,6 @@ jobs:
       - name: Migrate database
         run: mix ecto.migrate
 
-      - name: Run codebase check
-        run: mix codebase
-
       - name: Run Tests
         run: mix coverage
 
