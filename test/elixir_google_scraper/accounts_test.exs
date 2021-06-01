@@ -3,6 +3,7 @@ defmodule ElixirGoogleScraper.AccountsTest do
 
   alias ElixirGoogleScraper.Accounts
   import ElixirGoogleScraper.AccountsFixtures
+  # credo:disable-for-next-line Credo.Check.Consistency.MultiAliasImportRequireUse
   alias ElixirGoogleScraper.Accounts.{User, UserToken}
 
   describe "get_user_by_email/1" do
