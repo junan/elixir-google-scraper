@@ -1,9 +1,9 @@
 defmodule ElixirGoogleScraperWeb.UserAuthTest do
   use ElixirGoogleScraperWeb.ConnCase, async: true
 
+  import ElixirGoogleScraper.AccountsFixtures
   alias ElixirGoogleScraper.Accounts
   alias ElixirGoogleScraperWeb.UserAuth
-  import ElixirGoogleScraper.AccountsFixtures
 
   @remember_me_cookie "_elixir_google_scraper_web_user_remember_me"
 

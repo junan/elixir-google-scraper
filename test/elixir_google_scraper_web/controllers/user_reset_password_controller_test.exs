@@ -1,9 +1,9 @@
 defmodule ElixirGoogleScraperWeb.UserResetPasswordControllerTest do
   use ElixirGoogleScraperWeb.ConnCase, async: true
 
+  import ElixirGoogleScraper.AccountsFixtures
   alias ElixirGoogleScraper.Accounts
   alias ElixirGoogleScraper.Repo
-  import ElixirGoogleScraper.AccountsFixtures
 
   setup do
     %{user: user_fixture()}

@@ -1,8 +1,8 @@
 defmodule ElixirGoogleScraperWeb.UserSettingsControllerTest do
   use ElixirGoogleScraperWeb.ConnCase, async: true
 
-  alias ElixirGoogleScraper.Accounts
   import ElixirGoogleScraper.AccountsFixtures
+  alias ElixirGoogleScraper.Accounts
 
   setup :register_and_log_in_user
 
