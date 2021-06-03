@@ -6,7 +6,7 @@ import '../css/app.scss';
 // Import bootstrap's collapse component
 import 'bootstrap/js/dist/collapse';
 
-// Import fortawesome
+// Import fontawesome
 import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';

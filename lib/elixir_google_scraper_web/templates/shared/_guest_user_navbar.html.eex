@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand navbar-dark bg-dark">
   <a class="navbar-brand" href="/">
-  <i class="fas fa-spider"></i>
-  Google Scraper App
+    <i class="fas fa-spider"></i>
+    Google Scraper App
   </a>
 </nav>
