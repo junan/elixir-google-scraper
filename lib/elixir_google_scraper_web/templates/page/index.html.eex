@@ -1,3 +1,2 @@
 <section class="phx-hero">
-  <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
 </section>

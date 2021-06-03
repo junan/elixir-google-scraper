@@ -8,8 +8,5 @@
 @import 'layouts/authentication';
 
 // Components
+@import 'components/alert';
 @import 'components/user-auth';
-
-.invalid-feedback {
-  display: block;
-}
