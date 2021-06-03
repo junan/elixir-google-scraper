@@ -13,22 +13,25 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav me-auto">
       <li class="nav-item">
         <a class="nav-link" href="/">Dashboard</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/oauth-client">Oauth Client</a>
-      </li>
     </ul>
 
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ms-auto">
       <li class="nav-item">
-        <span class="navbar-text">Logged in as {{ .CurrentUser.Name }}</span>
+        <span class="navbar-text">
+          Logged in as <%= @current_user.email %>
+        </span>
       </li>
 
       <li class="nav-item">
-        <a href="/logout" class="nav-link"> Logout </a>
+        <%= link "Settings", class: "nav-link user-setting", to: Routes.user_settings_path(@conn, :edit) %>
+      </li>
+
+      <li class="nav-item">
+        <%= link "Logout", class: "nav-link", to: Routes.user_session_path(@conn, :delete), method: :delete %>
       </li>
     </ul>
   </div>
