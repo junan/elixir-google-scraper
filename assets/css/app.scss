@@ -6,3 +6,10 @@
 
 // Layouts
 @import 'layouts/authentication';
+
+// Components
+@import 'components/user-auth';
+
+.invalid-feedback {
+  display: block;
+}
