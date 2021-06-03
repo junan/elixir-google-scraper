@@ -1,5 +1,0 @@
-<%= if @current_user do %>
-  <%= render ElixirGoogleScraperWeb.SharedView, "_authenticated_user_navbar.html",  conn: @conn  %>
-<% else %>
-  <%= render ElixirGoogleScraperWeb.SharedView, "_guest_user_navbar.html",  conn: @conn  %>
-<% end %>
