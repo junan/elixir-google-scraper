@@ -18,4 +18,20 @@
     display: inline-block;
     color: burlywood;
   }
+
+  .user-setting,
+  .navbar-text {
+    &::after {
+      @include media-breakpoint-up(lg) {
+        content: '|';
+        padding-left: 8px;
+        color: lightcoral;
+      }
+    }
+  }
+
+  .navbar-text {
+    display: inline-block;
+    color: burlywood;
+  }
 }
