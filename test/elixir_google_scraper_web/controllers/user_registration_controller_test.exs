@@ -35,7 +35,7 @@ defmodule ElixirGoogleScraperWeb.UserRegistrationControllerTest do
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ "Settings"
-      assert response =~ "Log out"
+      assert response =~ "Logout"
     end
 
     test "render errors for invalid data", %{conn: conn} do

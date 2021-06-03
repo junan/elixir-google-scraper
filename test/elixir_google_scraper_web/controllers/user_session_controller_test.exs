@@ -11,7 +11,8 @@ defmodule ElixirGoogleScraperWeb.UserSessionControllerTest do
     test "renders log in page", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "Log in"
+      assert response =~ "Login to your account"
+      assert response =~ "Login"
       assert response =~ "Register"
     end
 
@@ -35,7 +36,7 @@ defmodule ElixirGoogleScraperWeb.UserSessionControllerTest do
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ "Settings"
-      assert response =~ "Log out"
+      assert response =~ "Logout"
     end
 
     test "logs the user in with remember me", %{conn: conn, user: user} do
@@ -73,7 +74,7 @@ defmodule ElixirGoogleScraperWeb.UserSessionControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
+      assert response =~ "Login"
       assert response =~ "Invalid email or password"
     end
   end
