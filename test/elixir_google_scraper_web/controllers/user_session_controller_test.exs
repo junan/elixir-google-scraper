@@ -35,6 +35,7 @@ defmodule ElixirGoogleScraperWeb.UserSessionControllerTest do
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
+      assert response =~ user.email
       assert response =~ "Settings"
       assert response =~ "Logout"
     end
