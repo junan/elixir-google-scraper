@@ -1,0 +1,3 @@
+<header class="app-header">
+  <%= render "_user_menu.html", assigns %>
+</header>
