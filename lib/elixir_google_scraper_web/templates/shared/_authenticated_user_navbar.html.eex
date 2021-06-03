@@ -1,5 +1,8 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">Google Scraper App</a>
+  <a class="navbar-brand" href="/">
+    <i class="fas fa-spider"></i>
+    Google Scraper App
+    </a>
   <button
     class="navbar-toggler"
     type="button"
