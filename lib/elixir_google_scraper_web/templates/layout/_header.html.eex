@@ -1,6 +1,6 @@
 <header class="app-header">
   <%= if @current_user do %>
-    <%= render ElixirGoogleScraperWeb.SharedView, "_authenticated_user_navbar.html",  conn: @conn  %>
+    <%# TODO: will take care in the login front end PR %>
   <% else %>
     <%= render ElixirGoogleScraperWeb.SharedView, "_guest_user_navbar.html",  conn: @conn  %>
   <% end %>
