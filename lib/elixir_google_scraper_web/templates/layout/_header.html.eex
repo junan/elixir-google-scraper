@@ -4,6 +4,6 @@
     <%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %>
     <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %>
   <% else %>
-    <%= render ElixirGoogleScraperWeb.SharedView, "_guest_user_navbar.html",  conn: @conn  %>
+    <%= render ElixirGoogleScraperWeb.SharedView, "_guest_user_navbar.html" %>
   <% end %>
 </header>
