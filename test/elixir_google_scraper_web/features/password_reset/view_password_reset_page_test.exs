@@ -3,7 +3,7 @@ defmodule ElixirGoogleScraperWeb.PasswordReset.ViewPasswordResetPageTest do
 
   @path Routes.user_settings_path(ElixirGoogleScraperWeb.Endpoint, :edit)
 
-  feature "views new upload page", %{session: session} do
+  feature "views password reset page", %{session: session} do
     session
     |> login_with_user
     |> visit(@path)
