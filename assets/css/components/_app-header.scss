@@ -19,7 +19,7 @@
     color: burlywood;
   }
 
-  .user-setting,
+  .setting-nav-link,
   .navbar-text {
     &::after {
       @include media-breakpoint-up(lg) {
