@@ -1,0 +1,9 @@
+.layout-default {
+  body {
+    @include make-container();
+  }
+
+  .app-main {
+    margin-top: 80px;
+  }
+}

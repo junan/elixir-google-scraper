@@ -4,6 +4,8 @@ defmodule ElixirGoogleScraperWeb.UserSessionController do
   alias ElixirGoogleScraper.Accounts
   alias ElixirGoogleScraperWeb.UserAuth
 
+  plug :put_layout, "authentication.html"
+
   def new(conn, _params) do
     render(conn, "new.html", error_message: nil)
   end

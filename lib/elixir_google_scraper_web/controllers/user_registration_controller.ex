@@ -5,6 +5,8 @@ defmodule ElixirGoogleScraperWeb.UserRegistrationController do
   alias ElixirGoogleScraper.Accounts.User
   alias ElixirGoogleScraperWeb.UserAuth
 
+  plug :put_layout, "authentication.html"
+
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})
     render(conn, "new.html", changeset: changeset)
