@@ -20,10 +20,10 @@ form {
   [type='text'],
   [type='time'],
   [type='week'] {
-    height: 50px;
+    height: rem(50px);
   }
 
   .form-group {
-    margin-bottom: 16px;
+    margin-bottom: rem(16px);
   }
 }

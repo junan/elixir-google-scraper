@@ -8,10 +8,10 @@
   }
 
   .app-main {
-    width: 300px;
+    width: rem(300px);
 
     @include media-breakpoint-up(md) {
-      width: 420px;
+      width: rem(420px);
     }
   }
 }
