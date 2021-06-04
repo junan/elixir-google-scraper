@@ -17,8 +17,8 @@
       </section>
     </header>
     <main role="main" class="container">
-      <p class="" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="" role="alert"><%= get_flash(@conn, :error) %></p>
+      <p role="alert"><%= get_flash(@conn, :info) %></p>
+      <p role="alert"><%= get_flash(@conn, :error) %></p>
       <%= @inner_content %>
     </main>
   </body>
