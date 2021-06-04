@@ -40,6 +40,7 @@ defmodule ElixirGoogleScraperWeb.UserConfirmationController do
         # by some automation or by the user themselves, so we redirect without
         # a warning message.
         case conn.assigns do
+          # credo:disable-for-next-line Credo.Check.Refactor.NegatedIsNil
           %{current_user: %{confirmed_at: confirmed_at}} when not is_nil(confirmed_at) ->
             redirect(conn, to: "/")
 

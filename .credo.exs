@@ -173,10 +173,7 @@
         {Credo.Check.Refactor.AppendSingleItem, []},
         {Credo.Check.Refactor.DoubleBooleanNegation, []},
         {Credo.Check.Refactor.ModuleDependencies, false},
-        {Credo.Check.Refactor.NegatedIsNil,
-         files: %{
-           excluded: ["lib/elixir_google_scraper_web/controllers/user_confirmation_controller.ex"]
-         }},
+        {Credo.Check.Refactor.NegatedIsNil, []},
         {Credo.Check.Refactor.PipeChainStart, []},
         {Credo.Check.Refactor.VariableRebinding, files: %{excluded: ["**/*_test.exs"]}},
         {Credo.Check.Warning.LeakyEnvironment, []},
