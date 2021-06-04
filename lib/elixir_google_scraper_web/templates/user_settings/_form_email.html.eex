@@ -1,0 +1,23 @@
+<%= form_for @email_changeset, Routes.user_settings_path(@conn, :update), fn f -> %>
+  <%= hidden_input f, :action, name: "action", value: "update_email" %>
+
+  <div class="row mb-3">
+    <%= label f, :email, class: "col-sm-2 col-form-label" %>
+
+    <div class="col-sm-4">
+      <%= email_input f, :email, required: true, class: "form-control" %>
+      <%= error_tag f, :email %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= label f, :current_password, class: "col-sm-2", for: "current_password_for_email" %>
+
+    <div class="col-sm-4">
+      <%= password_input f, :current_password, required: true, class: "form-control", name: "current_password", id: "current_password_for_email" %>
+      <%= error_tag f, :current_password %>
+    </div>
+  </div>
+
+  <%= submit "Change email", class: "btn btn-primary" %>
+<% end %>
