@@ -26,4 +26,8 @@ form {
   .form-group {
     margin-bottom: rem(16px);
   }
+
+  .invalid-feedback {
+    display: block;
+  }
 }
