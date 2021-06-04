@@ -4,7 +4,7 @@
   </div>
 
   <div class="user-auth__body">
-     <%= render "_form.html", assigns %>
+    <%= render "_form.html", assigns %>
   </div>
 
   <div class="user-auth__footer">
