@@ -1,25 +1,6 @@
 form {
-  [type='submit'],
-  [type='text'],
-  [type='email'],
-  [type='password'],
-  [type='button'],
-  [type='checkbox'],
-  [type='color'],
-  [type='date'],
-  [type='datetime-local'],
-  [type='file'],
-  [type='image'],
-  [type='month'],
-  [type='number'],
-  [type='radio'],
-  [type='range'],
-  [type='reset'],
-  [type='search'],
-  [type='tel'],
-  [type='text'],
-  [type='time'],
-  [type='week'] {
+  input,
+  button {
     height: rem(50px);
   }
 
