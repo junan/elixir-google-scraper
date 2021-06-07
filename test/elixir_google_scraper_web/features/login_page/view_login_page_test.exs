@@ -6,7 +6,7 @@ defmodule ElixirGoogleScraperWeb.LoginPage.ViewLoginPageTest do
   feature "views login page", %{session: session} do
     session
     |> visit(@path)
-    |> assert_has(Query.text("Log in", count: 3))
+    |> assert_has(Query.text("Log in", count: 2))
   end
 
   feature "logins with valid credential", %{session: session} do

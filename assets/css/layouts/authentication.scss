@@ -1,0 +1,17 @@
+.layout-authentication {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .app-main {
+    width: rem(300px);
+
+    @include media-breakpoint-up(md) {
+      width: rem(420px);
+    }
+  }
+}
