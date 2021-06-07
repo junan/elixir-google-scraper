@@ -40,6 +40,7 @@ defmodule ElixirGoogleScraper.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bcrypt_elixir, "~> 2.0"},
       {:wallaby, "~> 0.28.0", [only: :test, runtime: false]},
       {:sobelow, "~> 0.11.1", [only: [:dev, :test], runtime: false]},
       {:exvcr, "~> 0.12.3", [only: :test]},
@@ -61,7 +62,8 @@ defmodule ElixirGoogleScraper.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:phx_gen_auth, "~> 0.7.0"}
     ]
   end
 
