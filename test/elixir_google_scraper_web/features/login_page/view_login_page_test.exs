@@ -6,7 +6,7 @@ defmodule ElixirGoogleScraperWeb.LoginPage.ViewLoginPageTest do
   feature "views login page", %{session: session} do
     session
     |> visit(@path)
-    |> assert_has(Query.text("Log in", count: 2))
+    |> assert_has(Query.text("Login to your account"))
   end
 
   feature "logins with valid credential", %{session: session} do
@@ -18,8 +18,8 @@ defmodule ElixirGoogleScraperWeb.LoginPage.ViewLoginPageTest do
     |> visit(@path)
     |> fill_in(Query.text_field("Email"), with: email)
     |> fill_in(Query.css("#user_password"), with: "secret-password")
-    |> click(Query.button("Log in"))
-    |> assert_has(Query.text("Log out"))
+    |> click(Query.button("Login"))
+    |> assert_has(Query.text("Logout"))
   end
 
   feature "logins with INVALID credential", %{session: session} do
@@ -31,7 +31,7 @@ defmodule ElixirGoogleScraperWeb.LoginPage.ViewLoginPageTest do
     |> visit(@path)
     |> fill_in(Query.text_field("Email"), with: email)
     |> fill_in(Query.css("#user_password"), with: "invalid")
-    |> click(Query.button("Log in"))
+    |> click(Query.button("Login"))
     |> assert_has(Query.text("Invalid email or password"))
   end
 end

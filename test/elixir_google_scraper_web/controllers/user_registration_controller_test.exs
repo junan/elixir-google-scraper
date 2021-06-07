@@ -34,8 +34,9 @@ defmodule ElixirGoogleScraperWeb.UserRegistrationControllerTest do
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
+      assert response =~ email
       assert response =~ "Settings"
-      assert response =~ "Log out"
+      assert response =~ "Logout"
     end
 
     test "render errors for invalid data", %{conn: conn} do
