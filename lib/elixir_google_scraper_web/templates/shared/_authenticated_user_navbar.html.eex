@@ -31,7 +31,7 @@
       </li>
 
       <li class="nav-item">
-        <%= link "Settings", class: "nav-link user-setting", to: Routes.user_settings_path(@conn, :edit) %>
+        <%= link "Settings", class: "nav-link", to: Routes.user_settings_path(@conn, :edit) %>
       </li>
 
       <li class="nav-item">

@@ -3,19 +3,21 @@
     padding: rem(10px);
   }
 
-  .user-setting,
-  .navbar-text {
-    &::after {
-      @include media-breakpoint-up(lg) {
-        content: '|';
-        padding-left: rem(8px);
-        color: lightcoral;
-      }
+  .nav-item:not(:last-child)::after {
+    @include media-breakpoint-up(lg) {
+      content: '|';
+      color: lightcoral;
     }
   }
 
-  .navbar-text {
+  .navbar-text,
+  .nav-link {
     display: inline-block;
+    padding-left: rem(8px);
+    padding-right: rem(8px);
+  }
+
+  .navbar-text {
     color: burlywood;
   }
 }
