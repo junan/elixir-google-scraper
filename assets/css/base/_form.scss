@@ -1,0 +1,14 @@
+form {
+  input,
+  button {
+    height: rem(50px);
+  }
+
+  .form-group {
+    margin-bottom: rem(16px);
+  }
+
+  .invalid-feedback {
+    display: block;
+  }
+}

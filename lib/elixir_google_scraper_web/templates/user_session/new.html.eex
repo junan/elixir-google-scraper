@@ -1,0 +1,14 @@
+<div class="user-auth">
+  <div class="user-auth__header">
+    <h3 class="user-auth__title">Login to your account</h3>
+  </div>
+
+  <div class="user-auth__body">
+    <%= render "_form.html", assigns %>
+  </div>
+
+  <div class="user-auth__footer">
+    Don’t have an account?
+    <%= link "Register", to: Routes.user_registration_path(@conn, :new) %>
+  </div>
+</div>

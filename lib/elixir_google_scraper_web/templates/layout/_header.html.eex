@@ -1,0 +1,7 @@
+<header class="app-header">
+  <%= if @current_user do %>
+    <%= render ElixirGoogleScraperWeb.SharedView, "_authenticated_user_navbar.html", assigns %>
+  <% else %>
+    <%= render ElixirGoogleScraperWeb.SharedView, "_guest_user_navbar.html" %>
+  <% end %>
+</header>

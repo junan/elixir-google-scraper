@@ -1,0 +1,13 @@
+<%= form_for @changeset, Routes.user_registration_path(@conn, :create), [class: "form form-registration"], fn f -> %>
+  <div class="form-group">
+    <%= email_input f, :email, class: "form-control form__input", placeholder: "Email", required: true %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <div class="form-group">
+    <%= password_input f, :password, class: "form-control form__input", placeholder: "Password", required: true %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <%= submit "Register", class: "btn btn-primary w-100" %>
+<% end %>

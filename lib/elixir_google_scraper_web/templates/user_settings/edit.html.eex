@@ -1,0 +1,9 @@
+<div class="user-setting">
+  <div class="user-setting__header mb-4">
+    <h3 class="user-setting__title">Change your password</h3>
+  </div>
+
+  <div class="user-setting__body">
+    <%= render "_form.html", assigns %>
+  </div>
+</div>
