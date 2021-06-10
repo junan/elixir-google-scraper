@@ -10,6 +10,8 @@ defmodule ElixirGoogleScraper.Accounts.User do
     field(:confirmed_at, :naive_datetime)
 
     timestamps()
+
+    # has_many :keywords, Kwtool.Crawlers.Schemas.Keyword
   end
 
   @doc """
