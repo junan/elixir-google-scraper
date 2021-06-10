@@ -3,7 +3,7 @@
     <h2 class="phx-hero__title">Welcome to Google Scaraper App</h2>
   </div>
 
-  <div class="phx-hero__body mb-3">
+  <div class="phx-hero__body mb-4">
     Extract large amounts of data from the Google search results page
   </div>
 

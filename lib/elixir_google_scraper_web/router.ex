@@ -22,7 +22,7 @@ defmodule ElixirGoogleScraperWeb.Router do
   scope "/", ElixirGoogleScraperWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get("/", PageController, :index)
   end
 
   # Other scopes may use custom stacks.
@@ -41,9 +41,9 @@ defmodule ElixirGoogleScraperWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :browser
+      pipe_through(:browser)
       # coveralls-ignore-start
-      live_dashboard "/dashboard", metrics: ElixirGoogleScraperWeb.Telemetry
+      live_dashboard("/dashboard", metrics: ElixirGoogleScraperWeb.Telemetry)
       # coveralls-ignore-stop
     end
   end
@@ -69,8 +69,7 @@ defmodule ElixirGoogleScraperWeb.Router do
     get("/users/settings", UserSettingsController, :edit)
     put("/users/settings", UserSettingsController, :update)
 
-    post "/upload", UploadController, :create
-    get "/", DashboardController, :index
+    get("/keywords", KeywordsController, :index)
   end
 
   scope "/", ElixirGoogleScraperWeb do
