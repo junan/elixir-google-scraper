@@ -1,2 +1,7 @@
-<section class="phx-hero">
-</section>
+<div class="phx-hero">
+  <h1>Welcome to Google Scaraper App</h1>
+  <p class="tag-line">extract large amounts of data from the Google search results page</p>
+  <%= button("Login", to: "/users/log_in", method: :get, class: "btn btn-primary btn-lg") %>
+   Or
+  <%= button("Register", to: "/users/register", method: :get, class: "btn btn-primary btn-lg") %>
+</div>
