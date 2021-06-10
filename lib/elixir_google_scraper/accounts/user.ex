@@ -2,8 +2,6 @@ defmodule ElixirGoogleScraper.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias ElixirGoogleScraper.Scraper.Keyword
-
   @derive {Inspect, except: [:password]}
   schema "users" do
     field(:email, :string)
@@ -13,7 +11,7 @@ defmodule ElixirGoogleScraper.Accounts.User do
 
     timestamps()
 
-    has_many :keywords, Keyword
+    has_many(:keywords, ElixirGoogleScraper.Scraper.Keyword)
   end
 
   @doc """
