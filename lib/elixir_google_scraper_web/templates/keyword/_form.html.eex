@@ -1,15 +1,14 @@
 <form
-  class="form form-upload"
+  class="row g-3"
   action="/search"
   method="post"
   enctype="multipart/form-data"
 >
-  <div class="form-row">
-    <div class="col col-md-10">
-      <input type="file" class="form-control" name="file" />
-    </div>
-    <div class="col">
-      <button type="submit" class="btn btn-primary btn-block">Upload</button>
-    </div>
+  <div class="col-md-10">
+      <input class="form-control form-control-lg" type="file">
+  </div>
+
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary mb-3">Upload</button>
   </div>
 </form>
