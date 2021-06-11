@@ -1,15 +1,13 @@
-<div class="phx-hero">
-  <div class="phx-hero__header">
-    <h2 class="phx-hero__title">Welcome 2 to Google Scaraper App</h2>
+<div class="user-keyword">
+  <h3 class="user-keyword__title">
+    Search on Google by uploading CSV keywords file
+  </h3>
+
+  <div class="user-keyword__box">
+    <%= render "_form.html", assigns %>
   </div>
 
-  <div class="phx-hero__body mb-4">
-    Extract large amounts of data from the Google search results page
-  </div>
-
-  <div class="user-auth__footer">
-    <%= button("Login", to: "/users/log_in", method: :get, class: "btn btn-primary btn-lg") %>
-    |
-    <%= button("Register", to: "/users/register", method: :get, class: "btn btn-primary btn-lg") %>
+  <div class="user-keyword__result">
+    <%# TODO: uploaded keyword results %>
   </div>
 </div>
