@@ -69,7 +69,7 @@ defmodule ElixirGoogleScraperWeb.Router do
     get("/users/settings", UserSettingsController, :edit)
     put("/users/settings", UserSettingsController, :update)
 
-    get("/keywords", KeywordsController, :index)
+    get("/keywords", KeywordController, :index)
   end
 
   scope "/", ElixirGoogleScraperWeb do
