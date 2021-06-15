@@ -4,11 +4,11 @@ defmodule ElixirGoogleScraper.Scraper do
   """
 
   import Ecto.Query, warn: false
-  alias ElixirGoogleScraper.Repo
 
-  alias ElixirGoogleScraper.Scraper.Keyword
   alias ElixirGoogleScraper.Accounts.User
+  alias ElixirGoogleScraper.Repo
   alias ElixirGoogleScraper.Scraper.CSVKeyword
+  alias ElixirGoogleScraper.Scraper.Keyword
 
   @doc """
   Returns the list of keywords.
