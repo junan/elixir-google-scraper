@@ -7,7 +7,11 @@ defmodule ElixirGoogleScraper.ScraperTest do
     alias ElixirGoogleScraper.Scraper.Keyword
 
     @valid_attrs %{name: "some name", status: "some status", user_id: "some user_id"}
-    @update_attrs %{name: "some updated name", status: "some updated status", user_id: "some updated user_id"}
+    @update_attrs %{
+      name: "some updated name",
+      status: "some updated status",
+      user_id: "some updated user_id"
+    }
     @invalid_attrs %{name: nil, status: nil, user_id: nil}
 
     def keyword_fixture(attrs \\ %{}) do
