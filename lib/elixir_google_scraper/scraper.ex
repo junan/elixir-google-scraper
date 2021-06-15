@@ -8,7 +8,7 @@ defmodule ElixirGoogleScraper.Scraper do
 
   alias ElixirGoogleScraper.Scraper.Keyword
   alias ElixirGoogleScraper.Accounts.User
-  alias ElixirGoogleScraper.Scraper.CSVParser
+  alias ElixirGoogleScraper.Scraper.CSVKeyword
 
   @doc """
   Returns the list of keywords.
@@ -105,20 +105,14 @@ defmodule ElixirGoogleScraper.Scraper do
   end
 
   def save_keywords(file, %User{} = user) do
-    case CSVParser.parse(file) do
+    case CSVKeyword.validate(file) do
       {:ok, keyword_list} ->
         Enum.each(keyword_list, fn keyword ->
-          IO.inspect(List.first(keyword), label: "List.first(keyword")
-          IO.inspect(keyword, label: "keyword")
-
-          result =
-            create_keyword(%{
-              name: List.first(keyword),
-              user_id: user.id,
-              status: 0
-            })
-
-          IO.inspect(result, label: "result")
+          create_keyword(%{
+            name: List.first(keyword),
+            user_id: user.id,
+            status: 0
+          })
         end)
 
         {:ok, :file_is_proccessed}
@@ -126,8 +120,8 @@ defmodule ElixirGoogleScraper.Scraper do
       {:error, :file_is_empty} ->
         {:error, :file_is_empty}
 
-      {:error, :file_is_invalid} ->
-        {:error, :file_is_invalid}
+      {:error, :keyword_list_exceed} ->
+        {:error, :keyword_list_exceed}
     end
   end
 end
