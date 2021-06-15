@@ -8,7 +8,7 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
   end
 
   def create(conn, %{"file" => %Plug.Upload{} = file}) do
-    {alert_type, alert_message} =
+    {flash_type, flash_message} =
       case Scraper.save_keywords(file, conn.assigns.current_user) do
         {:ok, :file_is_proccessed} ->
           {:info, "Your CSV file has been uploaded successfully"}
@@ -21,7 +21,7 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
       end
 
     conn
-    |> put_flash(alert_type, alert_message)
+    |> put_flash(flash_type, flash_message)
     |> redirect(to: Routes.keyword_path(conn, :index))
   end
 end

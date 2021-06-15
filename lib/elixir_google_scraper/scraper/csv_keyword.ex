@@ -17,6 +17,4 @@ defmodule ElixirGoogleScraper.Scraper.CSVKeyword do
     |> CSV.parse_stream(skip_headers: false)
     |> Enum.to_list()
   end
-
-  def parse(_), do: {:error, :file_is_invalid}
 end
