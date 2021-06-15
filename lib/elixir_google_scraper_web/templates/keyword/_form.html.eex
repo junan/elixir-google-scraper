@@ -1,14 +1,9 @@
-<form
-  class="row g-3"
-  action="/search"
-  method="post"
-  enctype="multipart/form-data"
->
+<%= form_for @conn, Routes.keyword_path(@conn, :create), [multipart: true, class: 'row g-3'], fn f -> %>
   <div class="col-md-10">
-      <input class="form-control form-control-lg" type="file">
+       <%= file_input f, :file, class: "form-control form-control-lg" %>
   </div>
 
   <div class="col-md-2">
-    <button type="submit" class="btn btn-primary mb-3">Upload</button>
+     <%= submit "Upload", class: "btn btn-primary  mb-3" %>
   </div>
-</form>
+<% end %>
