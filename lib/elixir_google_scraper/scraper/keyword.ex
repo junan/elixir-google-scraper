@@ -16,6 +16,6 @@ defmodule ElixirGoogleScraper.Scraper.Keyword do
   def changeset(keyword, attrs) do
     keyword
     |> cast(attrs, [:name, :status, :user_id])
-    |> validate_required([:name, :status, :user_id])
+    |> validate_required([:name, :user_id])
   end
 end

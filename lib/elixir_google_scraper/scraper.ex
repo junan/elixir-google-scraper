@@ -110,8 +110,7 @@ defmodule ElixirGoogleScraper.Scraper do
         Enum.each(keyword_list, fn keyword ->
           create_keyword(%{
             name: List.first(keyword),
-            user_id: user.id,
-            status: 0
+            user_id: user.id
           })
         end)
 
