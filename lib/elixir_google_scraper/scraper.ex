@@ -10,18 +10,6 @@ defmodule ElixirGoogleScraper.Scraper do
   alias ElixirGoogleScraper.Scraper.CSVKeyword
   alias ElixirGoogleScraper.Scraper.Keyword
 
-  @doc """
-  Creates a keyword.
-
-  ## Examples
-
-      iex> create_keyword(%{field: value})
-      {:ok, %Keyword{}}
-
-      iex> create_keyword(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def create_keyword(attrs \\ %{}) do
     %Keyword{}
     |> Keyword.changeset(attrs)
