@@ -9,7 +9,7 @@ defmodule ElixirGoogleScraper.ScraperTest do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
 
-      assert {:ok, :file_is_proccessed} = Scraper.save_keywords(file, user)
+      assert :ok = Scraper.save_keywords(file, user)
 
       assert [keyword1, keyword2] = Repo.all(Keyword)
 
