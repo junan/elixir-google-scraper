@@ -11,6 +11,7 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
         |> get(Routes.keyword_path(conn, :index))
 
       assert html_response(conn, 200) =~ "Upload"
+      assert html_response(conn, 200) =~ "You have not performed any google search yet"
     end
   end
 
