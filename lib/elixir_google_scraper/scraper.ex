@@ -10,10 +10,13 @@ defmodule ElixirGoogleScraper.Scraper do
   alias ElixirGoogleScraper.Scraper.{CSVKeyword, Keyword}
 
   def paginated_keywords(user, params \\ %{}) do
-    keywords = where(Keyword, [k], k.user_id == ^user.id)
-
-    keywords
+    user
+    |> user_keywords
     |> Repo.paginate(params)
+  end
+
+  defp user_keywords(user) do
+    where(Keyword, [k], k.user_id == ^user.id)
   end
 
   def save_keywords(file, %User{} = user) do

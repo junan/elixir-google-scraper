@@ -6,8 +6,6 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
   def index(conn, params) do
     {keywords, pagination} = Scraper.paginated_keywords(conn.assigns[:current_user], params)
 
-    IO.inspect(keywords, label: "Pagination")
-
     render(conn, "index.html", keywords: keywords, pagination: pagination)
   end
 
