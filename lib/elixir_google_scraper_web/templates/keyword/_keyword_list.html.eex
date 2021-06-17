@@ -1,5 +1,3 @@
-<h1>Listing Keywords</h1>
-
 <%= unless Enum.empty?(@keywords) do %>
   <table class="table table-striped text-center">
     <thead>

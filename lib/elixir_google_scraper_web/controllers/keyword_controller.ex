@@ -5,6 +5,7 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
 
   def index(conn, _params) do
     keywords = Scraper.list_keywords(conn.assigns[:current_user])
+
     render(conn, "index.html", keywords: keywords)
   end
 
