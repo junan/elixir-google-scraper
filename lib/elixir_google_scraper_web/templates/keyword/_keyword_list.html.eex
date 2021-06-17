@@ -1,0 +1,24 @@
+<h1>Listing Keywords</h1>
+
+<%= unless Enum.empty?(@keywords) do %>
+  <table class="table table-striped text-center">
+    <thead>
+      <tr>
+        <th>Keyword</th>
+        <th>Search Completed</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for keyword <- @keywords do %>
+        <tr>
+          <td class="align-middle"><%= keyword.name %></td>
+          <td class="align-middle"><%= keyword.status %></td>
+          <td class="align-middle"><%= keyword.inserted_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else  %>
+  <h4 class="text-center">You have not performed any google search yet</h4>
+  <% end %>
