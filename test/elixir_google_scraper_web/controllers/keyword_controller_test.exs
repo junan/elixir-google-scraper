@@ -32,7 +32,7 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
     end
   end
 
-  test "render error message when CVS file is empty", %{
+  test "renders error message when CVS file is empty", %{
     conn: conn
   } do
     file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}

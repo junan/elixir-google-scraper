@@ -1,6 +1,6 @@
 <%= form_for @conn, Routes.keyword_path(@conn, :create), [multipart: true, class: 'row g-3'], fn f -> %>
   <div class="col-md-10">
-       <%= file_input f, :file, required: true, accept: ".csv", class: "form-control form-control-lg" %>
+      <%= file_input f, :file, required: true, accept: ".csv", class: "form-control form-control-lg" %>
   </div>
 
   <div class="col-md-2">
