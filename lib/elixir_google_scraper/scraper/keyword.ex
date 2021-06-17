@@ -7,6 +7,7 @@ defmodule ElixirGoogleScraper.Scraper.Keyword do
   schema "keywords" do
     field :name, :string
     field :status, Ecto.Enum, values: [pending: 0, failed: 1, completed: 2]
+
     belongs_to :user, User
 
     timestamps()

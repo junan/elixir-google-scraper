@@ -4,7 +4,7 @@ defmodule ElixirGoogleScraperWeb.PageControllerTest do
   describe "GET index/2" do
     test "renders the welcome message", %{conn: conn} do
       conn = get(conn, "/")
-      assert html_response(conn, 200) =~ "Welcome to Google Scaraper App"
+      assert html_response(conn, 200) =~ "Welcome to Google Scraper App"
     end
   end
 end
