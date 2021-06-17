@@ -3,7 +3,7 @@ defmodule ElixirGoogleScraper.Scraper.CSVKeywordTest do
 
   alias ElixirGoogleScraper.Scraper.CSVKeyword
 
-  describe "validate/2" do
+  describe "validate/1" do
     test "returns ok when keyword file is valid" do
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
 
