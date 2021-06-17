@@ -13,7 +13,7 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
         {:ok, :file_is_proccessed} ->
           {:info, "Your CSV file has been uploaded successfully"}
 
-        {:error, :keyword_list_exceed} ->
+        {:error, :keyword_list_exceeded} ->
           {:info, "CSV Keywords count can't be more than 1000"}
 
         {:error, :file_is_empty} ->
