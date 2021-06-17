@@ -21,14 +21,4 @@
   <h4 class="text-center">You have not performed any google search yet</h4>
   <% end %>
 
-  <%= pagination @conn, @pagination, [current_class: "is-current"], fn p -> %>
-    <nav class="pagination" role="navigation" aria-label="pagination">
-      <ul class="pagination-list">
-        <li><%= pagination_link p, :first, label: gettext("First"), class: "pagination-link", force_show: true %></li>
-        <%= for {pagenum, _, active} <- p.page_items do  %>
-          <li><%= pagination_link p, pagenum, class: "pagination-link", current: active %></li>
-        <% end %>
-        <li><%= pagination_link p, :last, label: gettext("Last"), class: "pagination-link", force_show: true %></li>
-      </ul>
-    </nav>
-  <% end %>
+ <%= render ElixirGoogleScraperWeb.SharedView, "_pagination.html", conn: @conn, pagination: @pagination %>
