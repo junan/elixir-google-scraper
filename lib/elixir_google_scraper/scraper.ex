@@ -25,7 +25,7 @@ defmodule ElixirGoogleScraper.Scraper do
           })
         end)
 
-        {:ok, :file_is_proccessed}
+        :ok
 
       {:error, :file_is_empty} ->
         {:error, :file_is_empty}
