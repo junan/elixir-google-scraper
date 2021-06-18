@@ -9,12 +9,6 @@ defmodule ElixirGoogleScraper.Scraper do
   alias ElixirGoogleScraper.Repo
   alias ElixirGoogleScraper.Scraper.{CSVKeyword, Keyword}
 
-  defp create_keyword(attrs) do
-    %Keyword{}
-    |> Keyword.changeset(attrs)
-    |> Repo.insert()
-  end
-
   def save_keywords(file, %User{} = user) do
     case CSVKeyword.validate(file) do
       {:ok, keyword_list} ->
@@ -33,5 +27,11 @@ defmodule ElixirGoogleScraper.Scraper do
       {:error, :keyword_list_exceeded} ->
         {:error, :keyword_list_exceeded}
     end
+  end
+
+  defp create_keyword(attrs) do
+    %Keyword{}
+    |> Keyword.changeset(attrs)
+    |> Repo.insert()
   end
 end
