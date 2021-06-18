@@ -23,7 +23,7 @@ defmodule ElixirGoogleScraper.ScraperTest do
   end
 
   describe "paginated_user_keywords/2" do
-    test "retruns only user's keywords" do
+    test "returns only user's keywords" do
       user = insert(:user)
       user2 = insert(:user)
       keyword = insert(:keyword, user: user)
