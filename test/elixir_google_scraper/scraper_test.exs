@@ -22,26 +22,24 @@ defmodule ElixirGoogleScraper.ScraperTest do
     end
   end
 
-  describe "paginated_keywords/2" do
+  describe "paginated_user_keywords/2" do
     test "retruns only user's keywords" do
       user = insert(:user)
       user2 = insert(:user)
       keyword = insert(:keyword, user: user)
       insert(:keyword, user: user2)
 
-      {keywords, _} = Scraper.paginated_keywords(user, %{page: 1})
+      {keywords, _} = Scraper.paginated_user_keywords(user, %{page: 1})
 
       assert length(keywords) == 1
       assert List.first(keywords).id == keyword.id
     end
 
-    test "retruns user's paginated keywords" do
+    test "returns user's paginated keywords" do
       user = insert(:user)
-      user2 = insert(:user)
-      for _ <- 1..13, do: insert(:keyword, user: user)
-      insert(:keyword, user: user2)
+      insert_list(13, :keyword, user: user)
 
-      {keywords, _} = Scraper.paginated_keywords(user, %{page: 1})
+      {keywords, _} = Scraper.paginated_user_keywords(user, %{page: 1})
 
       assert length(keywords) == 12
     end
