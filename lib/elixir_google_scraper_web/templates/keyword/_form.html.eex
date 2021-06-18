@@ -4,6 +4,6 @@
   </div>
 
   <div class="col-md-2">
-    <%= submit "Upload", class: "btn btn-primary  mb-3" %>
+    <%= submit "Upload", class: "btn btn-primary mb-3" %>
   </div>
 <% end %>
