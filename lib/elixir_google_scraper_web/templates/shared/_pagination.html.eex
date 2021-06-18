@@ -1,6 +1,6 @@
 <%= pagination @conn, @pagination, [current_class: "is-current"], fn p -> %>
   <nav aria-label="Page navigation justify-content-center">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination">
       <li class="page-item"><%= pagination_link p, :first, label: gettext("First"), class: "page-link", force_show: true %></li>
       <%= for {pagenum, _, active} <- p.page_items do  %>
         <li class="page-item"><%= pagination_link p, pagenum, class: "page-link", current: active %></li>

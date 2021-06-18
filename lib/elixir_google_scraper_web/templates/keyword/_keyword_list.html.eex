@@ -17,7 +17,7 @@
       <% end %>
     </tbody>
   </table>
-    <%= render ElixirGoogleScraperWeb.SharedView, "_pagination.html", conn: @conn, pagination: @pagination %>
-  <% else  %>
-    <h4 class="text-center">You have not performed any google search yet</h4>
-  <% end %>
+  <%= render ElixirGoogleScraperWeb.SharedView, "_pagination.html", conn: @conn, pagination: @pagination %>
+<% else %>
+  <h4 class="text-center">You have not performed any google search yet</h4>
+<% end %>

@@ -8,6 +8,6 @@
   </div>
 
   <div class="user-keyword__list">
-     <%= render "_keyword_list.html", assigns %>
+    <%= render "_keyword_list.html", assigns %>
   </div>
 </div>
