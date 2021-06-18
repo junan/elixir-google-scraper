@@ -5,8 +5,6 @@ defmodule ElixirGoogleScraper.Accounts do
 
   import Ecto.Query, warn: false
 
-  # Disable it due to https://github.com/rrrene/credo/issues/441
-  # credo:disable-for-next-line Credo.Check.Consistency.MultiAliasImportRequireUse
   alias ElixirGoogleScraper.Accounts.{User, UserNotifier, UserToken}
   alias ElixirGoogleScraper.Repo
 

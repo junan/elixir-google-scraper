@@ -1,2 +1,15 @@
-<section class="phx-hero">
-</section>
+<div class="phx-hero">
+  <div class="phx-hero__header">
+    <h2 class="phx-hero__title">Welcome to Google Scraper App</h2>
+  </div>
+
+  <div class="phx-hero__body mb-4">
+    Extract large amounts of data from the Google search results page
+  </div>
+
+  <div class="user-auth__footer">
+    <%= button("Login", to: "/users/log_in", method: :get, class: "btn btn-primary btn-lg") %>
+    |
+    <%= button("Register", to: "/users/register", method: :get, class: "btn btn-primary btn-lg") %>
+  </div>
+</div>

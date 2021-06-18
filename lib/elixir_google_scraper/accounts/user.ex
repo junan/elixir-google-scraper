@@ -9,6 +9,8 @@ defmodule ElixirGoogleScraper.Accounts.User do
     field(:hashed_password, :string)
     field(:confirmed_at, :naive_datetime)
 
+    has_many(:keywords, ElixirGoogleScraper.Scraper.Keyword)
+
     timestamps()
   end
 

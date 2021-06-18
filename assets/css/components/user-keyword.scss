@@ -1,0 +1,10 @@
+.user-keyword {
+  &__title {
+    text-align: center;
+  }
+
+  &__box,
+  &__title {
+    margin-bottom: rem(50px);
+  }
+}
