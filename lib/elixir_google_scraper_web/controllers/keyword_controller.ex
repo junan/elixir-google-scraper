@@ -3,8 +3,10 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
 
   alias ElixirGoogleScraper.Scraper
 
-  def index(conn, _params) do
-    render(conn, "index.html")
+  def index(conn, params) do
+    {keywords, pagination} = Scraper.paginated_user_keywords(conn.assigns[:current_user], params)
+
+    render(conn, "index.html", keywords: keywords, pagination: pagination)
   end
 
   def create(conn, %{"file" => %Plug.Upload{} = file}) do

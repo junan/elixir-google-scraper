@@ -22,6 +22,10 @@ defmodule ElixirGoogleScraperWeb.FeatureCase do
 
         login(session, user.email, "secret-password")
       end
+
+      def login_with(session, user) do
+        login(session, user.email, "secret-password")
+      end
     end
   end
 end

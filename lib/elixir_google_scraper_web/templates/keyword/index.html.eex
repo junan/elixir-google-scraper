@@ -7,7 +7,7 @@
     <%= render "_form.html", assigns %>
   </div>
 
-  <div class="user-keyword__result">
-    <%# TODO: uploaded keyword results %>
+  <div class="user-keyword__list">
+    <%= render "_keyword_list.html", assigns %>
   </div>
 </div>
