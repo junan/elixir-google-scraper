@@ -1,0 +1,13 @@
+<div class="user-keyword">
+  <h3 class="user-keyword__title">
+    Search on Google by uploading CSV keywords file
+  </h3>
+
+  <div class="user-keyword__box">
+    <%= render "_form.html", assigns %>
+  </div>
+
+  <div class="user-keyword__list">
+    <%= render "_keyword_list.html", assigns %>
+  </div>
+</div>
