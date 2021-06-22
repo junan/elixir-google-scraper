@@ -65,7 +65,9 @@ defmodule ElixirGoogleScraper.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phx_gen_auth, "~> 0.7.0"},
       {:nimble_csv, "~> 1.1"},
-      {:phoenix_pagination, "~> 0.7.0"}
+      {:phoenix_pagination, "~> 0.7.0"},
+      {:floki, "~> 0.31.0"},
+      {:httpoison, "~> 1.8"}
     ]
   end
 
