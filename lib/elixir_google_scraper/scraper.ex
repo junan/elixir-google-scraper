@@ -30,7 +30,7 @@ defmodule ElixirGoogleScraper.Scraper do
             keyword
           end)
 
-        process_keywords(keywords)
+        enqueue_keywords(keywords)
 
         :ok
 
@@ -42,10 +42,10 @@ defmodule ElixirGoogleScraper.Scraper do
     end
   end
 
-  def process_keywords(keywords) do
+  def enqueue_keywords(keywords) do
     Enum.each(keywords, fn keyword ->
       job = ScrapingWorker.new(%{keyword_id: keyword.id})
-      IO.inspect(job)
+      Oban.insert(job)
     end)
   end
 
