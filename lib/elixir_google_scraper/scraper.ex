@@ -43,9 +43,14 @@ defmodule ElixirGoogleScraper.Scraper do
   end
 
   def enqueue_keywords(keywords) do
-    Enum.each(keywords, fn keyword ->
-      job = ScrapingWorker.new(%{keyword_id: keyword.id})
-      Oban.insert(job)
+    keywords
+    |> Enum.with_index()
+    |> Enum.each(fn {keyword, index} ->
+      IO.inspect(index, label: "Index")
+
+      %{keyword_id: keyword.id}
+      |> ScrapingWorker.new(schedule_in: index + 2)
+      |> Oban.insert()
     end)
   end
 
