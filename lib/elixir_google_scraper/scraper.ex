@@ -8,6 +8,7 @@ defmodule ElixirGoogleScraper.Scraper do
   alias ElixirGoogleScraper.Accounts.User
   alias ElixirGoogleScraper.Repo
   alias ElixirGoogleScraper.Scraper.{CSVKeyword, Keyword}
+  alias ElixirGoogleScraper.Scraper.Worker.ScrapingWorker
 
   def paginated_user_keywords(user, params \\ %{}) do
     user
@@ -16,21 +17,22 @@ defmodule ElixirGoogleScraper.Scraper do
   end
 
   def save_keywords(file, %User{} = user) do
-    keyword_ids = []
-
     case CSVKeyword.validate(file) do
       {:ok, keyword_list} ->
-        Enum.each(keyword_list, fn keyword ->
-          keyword =
-            create_keyword(%{
-              name: List.first(keyword),
-              user_id: user.id
-            })
+        keywords =
+          Enum.map(keyword_list, fn keyword ->
+            {_, keyword} =
+              create_keyword(%{
+                name: List.first(keyword),
+                user_id: user.id
+              })
 
-          keyword_ids ++ [keyword.id]
-        end)
+            keyword
+          end)
 
-        {:ok, keyword_ids}
+        process_keywords(keywords)
+
+        :ok
 
       {:error, :file_is_empty} ->
         {:error, :file_is_empty}
@@ -40,7 +42,14 @@ defmodule ElixirGoogleScraper.Scraper do
     end
   end
 
-  def create_keyword(attrs) do
+  def process_keywords(keywords) do
+    Enum.each(keywords, fn keyword ->
+      job = ScrapingWorker.new(%{keyword_id: keyword.id})
+      IO.inspect(job)
+    end)
+  end
+
+  defp create_keyword(attrs) do
     %Keyword{}
     |> Keyword.changeset(attrs)
     |> Repo.insert()

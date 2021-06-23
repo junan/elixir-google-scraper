@@ -35,8 +35,7 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
   def create(conn, %{"file" => %Plug.Upload{} = file}) do
     {flash_type, flash_message} =
       case Scraper.save_keywords(file, conn.assigns.current_user) do
-        {:ok, keyword_ids} ->
-          IO.inspect(keyword_ids, label: "Keyword Ids")
+        :ok ->
           {:info, "Your CSV file has been uploaded successfully"}
 
         {:error, :keyword_list_exceeded} ->
