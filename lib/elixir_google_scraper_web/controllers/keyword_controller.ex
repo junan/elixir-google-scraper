@@ -10,25 +10,6 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
   def index(conn, params) do
     {keywords, pagination} = Scraper.paginated_user_keywords(conn.assigns[:current_user], params)
 
-    keyword = List.first(keywords)
-
-    # keyword
-    # |> Keyword.changeset(%{name: Faker.Company.name()})
-    # |> Repo.update()
-
-    IO.puts("Starting work ....")
-    IO.inspect(keyword.id)
-    IO.puts("Finished work")
-    # ElixirGoogleScraper.Scraper.Worker.ScrapingWorker
-
-    # ElixirGoogleScraper.Scraper.Worker.ScrapingWorker.new(re)
-
-    job = ElixirGoogleScraper.Scraper.Worker.ScrapingWorker.new(%{keyword_id: 96})
-
-    IO.inspect(job, label: "The job")
-
-    Oban.insert(job)
-
     render(conn, "index.html", keywords: keywords, pagination: pagination)
   end
 
