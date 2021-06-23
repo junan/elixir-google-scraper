@@ -67,7 +67,8 @@ defmodule ElixirGoogleScraper.MixProject do
       {:nimble_csv, "~> 1.1"},
       {:phoenix_pagination, "~> 0.7.0"},
       {:floki, "~> 0.31.0"},
-      {:httpoison, "~> 1.8"}
+      {:httpoison, "~> 1.8"},
+      {:faker, "~> 0.16"}
     ]
   end
 

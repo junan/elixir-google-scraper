@@ -16,16 +16,21 @@ defmodule ElixirGoogleScraper.Scraper do
   end
 
   def save_keywords(file, %User{} = user) do
+    keyword_ids = []
+
     case CSVKeyword.validate(file) do
       {:ok, keyword_list} ->
         Enum.each(keyword_list, fn keyword ->
-          create_keyword(%{
-            name: List.first(keyword),
-            user_id: user.id
-          })
+          keyword =
+            create_keyword(%{
+              name: List.first(keyword),
+              user_id: user.id
+            })
+
+          keyword_ids ++ [keyword.id]
         end)
 
-        :ok
+        {:ok, keyword_ids}
 
       {:error, :file_is_empty} ->
         {:error, :file_is_empty}
@@ -35,7 +40,7 @@ defmodule ElixirGoogleScraper.Scraper do
     end
   end
 
-  defp create_keyword(attrs) do
+  def create_keyword(attrs) do
     %Keyword{}
     |> Keyword.changeset(attrs)
     |> Repo.insert()

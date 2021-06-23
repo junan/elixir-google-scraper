@@ -5,10 +5,10 @@ defmodule ElixirGoogleScraper.Scraper.Keyword do
   alias ElixirGoogleScraper.Accounts.User
 
   schema "keywords" do
-    field :name, :string
-    field :status, Ecto.Enum, values: [pending: 0, failed: 1, completed: 2]
+    field(:name, :string)
+    field(:status, Ecto.Enum, values: [pending: 0, failed: 1, completed: 2])
 
-    belongs_to :user, User
+    belongs_to(:user, User)
 
     timestamps()
   end
