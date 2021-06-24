@@ -6,24 +6,21 @@ defmodule ElixirGoogleScraper.Scraper.SearchResponseParser do
     top_ads_urls: "#tads .Krnil",
     total_ads_count: ".Krnil",
     result_urls: ".yuRUbf > a",
-    # result_urls: ".ZINbbc.xpd.O9g5cc.uUPGi .BNeawe.UPmit.AP7Wnd",
-    # total_result: ".ZINbbc.xpd.O9g5cc.uUPGi .BNeawe.UPmit.AP7Wnd",
     total_result: ".yuRUbf",
     total_links_count: "a[href]"
   }
 
-  def parse(response) do
-    {_, document} = Floki.parse_document(response.body)
-
-    File.write!("html.html", response.body)
+  def parse(html) do
+    {_, document} = Floki.parse_document(html)
 
     %SearchResult{
       top_ads_count: top_ads_count(document),
       top_ads_urls: top_ads_urls(document),
-      html: response.body,
+      total_ads_count: total_ads_count(document),
       result_count: result_count(document),
       result_urls: result_urls(document),
-      total_links_count: total_links_count(document)
+      total_links_count: total_links_count(document),
+      html: response.body
     }
   end
 
@@ -55,5 +52,11 @@ defmodule ElixirGoogleScraper.Scraper.SearchResponseParser do
     document
     |> Floki.find(@selector_mapping.top_ads_urls)
     |> Floki.attribute("href")
+  end
+
+  defp total_ads_count(document) do
+    document
+    |> Floki.find(@selector_mapping.top_ads_urls)
+    |> Enum.count()
   end
 end

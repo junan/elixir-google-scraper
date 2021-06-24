@@ -3,10 +3,10 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
 
   def scrap(keyword) do
     response = make_request(keyword)
-    SearchResponseParser.parse(response)
+    SearchResponseParser.parse(response.body)
   end
 
-  def google_search_url, do: "https://www.google.com/search"
+  defp google_search_url, do: "https://www.google.com/search"
 
   defp make_request(keyword) do
     keyword
