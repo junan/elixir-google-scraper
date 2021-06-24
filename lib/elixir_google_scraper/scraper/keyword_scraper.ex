@@ -11,7 +11,7 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
   defp make_request(keyword) do
     keyword
     |> build_url
-    |> HTTPoison.get!(headers)
+    |> HTTPoison.get!(headers())
   end
 
   def headers do
@@ -22,7 +22,7 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
   end
 
   defp build_url(keyword) do
-    google_search_url
+    google_search_url()
     |> URI.parse()
     |> Map.put(:query, URI.encode_query(q: keyword, hl: "en", lr: "lang_on"))
     |> URI.to_string()

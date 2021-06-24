@@ -47,7 +47,7 @@ defmodule ElixirGoogleScraper.Scraper do
     |> Enum.with_index()
     |> Enum.each(fn {keyword, index} ->
       %{keyword_id: keyword.id}
-      |> ScrapingWorker.new(schedule_in: index + 2)
+      |> ScrapingWorker.new(schedule_in: index + 3)
       |> Oban.insert()
     end)
   end
