@@ -18,6 +18,8 @@ defmodule ElixirGoogleScraper.Scraper.SearchResponseParser do
     File.write!("html.html", response.body)
 
     %SearchResult{
+      top_ads_count: top_ads_count(document),
+      top_ads_urls: top_ads_urls(document),
       html: response.body,
       result_count: result_count(document),
       result_urls: result_urls(document),
@@ -26,7 +28,15 @@ defmodule ElixirGoogleScraper.Scraper.SearchResponseParser do
   end
 
   defp total_links_count(document) do
-    document |> Floki.find(@selector_mapping.total_links_count) |> Enum.count()
+    document
+    |> Floki.find(@selector_mapping.total_links_count)
+    |> Enum.count()
+  end
+
+  defp result_count(document) do
+    document
+    |> Floki.find(@selector_mapping.total_result)
+    |> Enum.count()
   end
 
   defp result_urls(document) do
@@ -35,7 +45,15 @@ defmodule ElixirGoogleScraper.Scraper.SearchResponseParser do
     |> Floki.attribute("href")
   end
 
-  defp result_count(document) do
-    document |> Floki.find(@selector_mapping.total_result) |> Enum.count()
+  def top_ads_count(document) do
+    document
+    |> Floki.find(@selector_mapping.top_ads_count)
+    |> Enum.count()
+  end
+
+  defp top_ads_urls(document) do
+    document
+    |> Floki.find(@selector_mapping.top_ads_urls)
+    |> Floki.attribute("href")
   end
 end
