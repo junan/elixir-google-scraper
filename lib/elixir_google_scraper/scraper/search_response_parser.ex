@@ -20,7 +20,7 @@ defmodule ElixirGoogleScraper.Scraper.SearchResponseParser do
       result_count: result_count(document),
       result_urls: result_urls(document),
       total_links_count: total_links_count(document),
-      html: response.body
+      html: html
     }
   end
 
