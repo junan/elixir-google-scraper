@@ -13,13 +13,14 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
   end
 
   defp build_url(keyword) do
-    "#{google_search_url}?q=#{keyword}"
+    google_search_url
+    |> URI.parse()
+    |> Map.put(:query, URI.encode_query(q: keyword, hl: "en", lr: "lang_on"))
+    |> URI.to_string()
   end
 
   def parse_response(response) do
-    {:ok, document} = Floki.parse_document(response.body)
-
-    IO.inspect(document, label: "Document")
+    {_, document} = Floki.parse_document(response.body)
 
     document
   end
