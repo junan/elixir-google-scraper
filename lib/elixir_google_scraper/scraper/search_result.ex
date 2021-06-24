@@ -1,6 +1,8 @@
-defmodule ElixirGoogleScraper.SearchResult do
+defmodule ElixirGoogleScraper.Scraper.SearchResult do
   use Ecto.Schema
   import Ecto.Changeset
+
+  alias ElixirGoogleScraper.Scraper.Keyword
 
   schema "search_results" do
     field(:html, :string)
@@ -10,7 +12,8 @@ defmodule ElixirGoogleScraper.SearchResult do
     field(:top_ads_urls, {:array, :string})
     field(:total_ads_count, :integer)
     field(:total_links_count, :integer)
-    field(:keyword_id, :id)
+
+    belongs_to(:keyword, Keyword)
 
     timestamps()
   end
@@ -25,8 +28,9 @@ defmodule ElixirGoogleScraper.SearchResult do
       :result_count,
       :result_urls,
       :total_links_count,
-      :html
+      :html,
+      :keyword_id
     ])
-    |> validate_required([:result_count, :result_urls, :total_links_count, :html])
+    |> validate_required([:result_count, :total_links_count, :html, :keyword_id])
   end
 end

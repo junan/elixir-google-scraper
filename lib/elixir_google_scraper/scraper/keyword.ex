@@ -3,12 +3,14 @@ defmodule ElixirGoogleScraper.Scraper.Keyword do
   import Ecto.Changeset
 
   alias ElixirGoogleScraper.Accounts.User
+  alias ElixirGoogleScraper.Scraper.SearchResult
 
   schema "keywords" do
     field(:name, :string)
     field(:status, Ecto.Enum, values: [pending: 0, failed: 1, completed: 2])
 
     belongs_to(:user, User)
+    has_one(:search_result, SearchResult)
 
     timestamps()
   end
