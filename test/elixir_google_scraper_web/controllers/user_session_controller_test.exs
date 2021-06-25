@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraperWeb.UserSessionControllerTest do
-  use ElixirGoogleScraperWeb.ConnCase
+  use ElixirGoogleScraperWeb.ConnCase, async: true
 
   import ElixirGoogleScraper.AccountsFixtures
 
