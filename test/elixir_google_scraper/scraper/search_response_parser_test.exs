@@ -1,7 +1,7 @@
 defmodule ElixirGoogleScraper.Scraper.SearchResponseParserTest do
   use ElixirGoogleScraper.DataCase, async: true
 
-  alias ElixirGoogleScraper.Scraper.{SearchResponseParser, SearchResult}
+  alias ElixirGoogleScraper.Scraper.SearchResponseParser
 
   describe "parse/1" do
     test "returns parsed data" do

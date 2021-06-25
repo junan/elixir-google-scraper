@@ -45,7 +45,7 @@ defmodule ElixirGoogleScraper.Scraper do
   # There will be 3 seconds interval for each job running to avoid Google blocking for mass request.
   # For example the first job will be run at 3 second, then second job will be run at 6 second
   # third job will be run at 9 second so on
-  def enqueue_keywords(keywords) do
+  defp enqueue_keywords(keywords) do
     keywords
     |> Enum.with_index()
     |> Enum.each(fn {keyword, index} ->
