@@ -1,15 +1,15 @@
-defmodule ElixirGoogleScraperWeb.DashboardPage.ViewDashBoardPageTest do
-  use ElixirGoogleScraperWeb.FeatureCase, async: true
+# defmodule ElixirGoogleScraperWeb.DashboardPage.ViewDashBoardPageTest do
+#   use ElixirGoogleScraperWeb.FeatureCase, async: true
 
-  @path Routes.keyword_path(ElixirGoogleScraperWeb.Endpoint, :index)
+#   @path Routes.keyword_path(ElixirGoogleScraperWeb.Endpoint, :index)
 
-  feature "views dashboard page", %{session: session} do
-    user = insert(:user)
-    keyword = insert(:keyword, user: user)
+#   feature "views dashboard page", %{session: session} do
+#     user = insert(:user)
+#     keyword = insert(:keyword, user: user)
 
-    session
-    |> login_with(user)
-    |> visit(@path)
-    |> assert_has(Query.text(keyword.name))
-  end
-end
+#     session
+#     |> login_with(user)
+#     |> visit(@path)
+#     |> assert_has(Query.text(keyword.name))
+#   end
+# end
