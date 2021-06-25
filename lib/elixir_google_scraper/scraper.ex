@@ -42,9 +42,10 @@ defmodule ElixirGoogleScraper.Scraper do
     end
   end
 
-  # There will be 3 seconds interval between each jonb starting time, this is to avoid Google blocking for mass requests.
-  # For example the first job will be run at 3 second, then second job will be run at 6 second
-  # third job will be run at 9 second and so on
+  # There will be 3 seconds interval between each jonb starting time.
+  # This is to avoid Google blocking for mass requests.
+  # For example the first job will be run at 3 second, second job will be run at 6 second,
+  # then third job will be run at 9 second and so on.
   defp enqueue_keywords(keywords) do
     keywords
     |> Enum.with_index()
