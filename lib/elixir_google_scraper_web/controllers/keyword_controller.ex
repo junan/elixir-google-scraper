@@ -1,11 +1,8 @@
 defmodule ElixirGoogleScraperWeb.KeywordController do
+  use ElixirGoogleScraperWeb, :controller
   import Ecto.Query, warn: false
 
-  use ElixirGoogleScraperWeb, :controller
-
   alias ElixirGoogleScraper.Scraper
-  alias ElixirGoogleScraper.Repo
-  alias ElixirGoogleScraper.Scraper.{CSVKeyword, KeywordScraper, Keyword}
 
   def index(conn, params) do
     {keywords, pagination} = Scraper.paginated_user_keywords(conn.assigns[:current_user], params)

@@ -5,7 +5,7 @@ defmodule ElixirGoogleScraper.Scraper.Worker.ScrapingWorker do
     unique: [period: 30]
 
   alias ElixirGoogleScraper.Repo
-  alias ElixirGoogleScraper.Scraper.{KeywordScraper, Keyword, SearchResult}
+  alias ElixirGoogleScraper.Scraper.{Keyword, KeywordScraper, SearchResult}
 
   @impl Worker
   def perform(%Oban.Job{args: %{"keyword_id" => keyword_id}}) do
