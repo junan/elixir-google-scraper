@@ -14,7 +14,7 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
     |> HTTPoison.get!(headers())
   end
 
-  def headers do
+  defp headers do
     user_agent =
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.447"
 
