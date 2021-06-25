@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraperWeb.UserAuthTest do
-  use ElixirGoogleScraperWeb.ConnCase, async: true
+  use ElixirGoogleScraperWeb.ConnCase
 
   import ElixirGoogleScraper.AccountsFixtures
   alias ElixirGoogleScraper.Accounts

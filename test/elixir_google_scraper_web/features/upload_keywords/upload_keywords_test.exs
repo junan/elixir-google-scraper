@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraperWeb.UploadKeywords.UploadKeywordsTest do
-  use ElixirGoogleScraperWeb.FeatureCase, async: true
+  use ElixirGoogleScraperWeb.FeatureCase
 
   import Wallaby.Query, only: [button: 1, file_field: 1]
 

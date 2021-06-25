@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraper.AccountsTest do
-  use ElixirGoogleScraper.DataCase
+  use ElixirGoogleScraper.DataCase, async: true
 
   import ElixirGoogleScraper.AccountsFixtures
   alias ElixirGoogleScraper.Accounts
@@ -152,7 +152,8 @@ defmodule ElixirGoogleScraper.AccountsTest do
     test "validates email uniqueness", %{user: user} do
       %{email: email} = user_fixture()
 
-      {:error, changeset} = Accounts.apply_user_email(user, valid_user_password(), %{email: email})
+      {:error, changeset} =
+        Accounts.apply_user_email(user, valid_user_password(), %{email: email})
 
       assert "has already been taken" in errors_on(changeset).email
     end

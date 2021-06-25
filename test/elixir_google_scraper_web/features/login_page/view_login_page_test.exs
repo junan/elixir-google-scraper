@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraperWeb.LoginPage.ViewLoginPageTest do
-  use ElixirGoogleScraperWeb.FeatureCase, async: true
+  use ElixirGoogleScraperWeb.FeatureCase
 
   @path Routes.user_session_path(ElixirGoogleScraperWeb.Endpoint, :new)
 

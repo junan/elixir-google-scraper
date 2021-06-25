@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraperWeb.RegistrationPage.ViewRegistrationPageTest do
-  use ElixirGoogleScraperWeb.FeatureCase, async: true
+  use ElixirGoogleScraperWeb.FeatureCase
 
   @path Routes.user_registration_path(ElixirGoogleScraperWeb.Endpoint, :new)
 
