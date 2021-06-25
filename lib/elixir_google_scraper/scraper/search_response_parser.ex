@@ -42,7 +42,7 @@ defmodule ElixirGoogleScraper.Scraper.SearchResponseParser do
     |> Floki.attribute("href")
   end
 
-  def top_ads_count(document) do
+  defp top_ads_count(document) do
     document
     |> Floki.find(@selector_mapping.top_ads_count)
     |> Enum.count()

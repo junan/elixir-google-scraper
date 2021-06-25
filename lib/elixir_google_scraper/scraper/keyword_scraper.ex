@@ -27,10 +27,4 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
     |> Map.put(:query, URI.encode_query(q: keyword, hl: "en", lr: "lang_on"))
     |> URI.to_string()
   end
-
-  def parse_response(response) do
-    {_, document} = Floki.parse_document(response.body)
-
-    document
-  end
 end

@@ -1,6 +1,5 @@
 defmodule ElixirGoogleScraperWeb.KeywordController do
   use ElixirGoogleScraperWeb, :controller
-  import Ecto.Query, warn: false
 
   alias ElixirGoogleScraper.Scraper
 
