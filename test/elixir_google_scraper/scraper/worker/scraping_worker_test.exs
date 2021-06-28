@@ -25,8 +25,7 @@ defmodule ElixirGoogleScraper.Scraper.Worker.ScrapingWorkerTest do
 
     test "updates the keyword as completed" do
       use_cassette "scraper/keyword_buy_bike" do
-        user = insert(:user)
-        keyword = insert(:keyword, name: "buy bike", user: user)
+        keyword = insert(:keyword, status: :pending)
 
         ScrapingWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword.id}})
 

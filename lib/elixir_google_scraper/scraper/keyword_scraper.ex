@@ -2,17 +2,16 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
   alias ElixirGoogleScraper.Scraper.SearchResponseParser
 
   @user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.447"
+  @google_search_url "https://www.google.com/search"
 
   def scrape(keyword) do
     response = make_request(keyword)
     SearchResponseParser.parse(response.body)
   end
 
-  defp google_search_url, do: "https://www.google.com/search"
-
   defp make_request(keyword) do
     keyword
-    |> build_url
+    |> build_url()
     |> HTTPoison.get!(headers())
   end
 
@@ -21,7 +20,7 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
   end
 
   defp build_url(keyword) do
-    google_search_url()
+    @google_search_url
     |> URI.parse()
     |> Map.put(:query, URI.encode_query(q: keyword, hl: "en", lr: "lang_on"))
     |> URI.to_string()
