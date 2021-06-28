@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraper.Scraper.Worker.ScrapingWorkerTest do
-  use ElixirGoogleScraper.DataCase, async: true
+  use ElixirGoogleScraper.DataCase
 
   alias ElixirGoogleScraper.Scraper.Worker.ScrapingWorker
 
@@ -17,7 +17,7 @@ defmodule ElixirGoogleScraper.Scraper.Worker.ScrapingWorkerTest do
         assert search_result.top_ads_urls == []
         assert search_result.total_ads_count == 0
         assert Enum.count(search_result.result_urls) == 10
-        assert search_result.total_links_count == 222
+        assert search_result.total_links_count == 244
         assert search_result.keyword_id == keyword.id
         assert String.contains?(search_result.html, "<!doctype html>")
       end
