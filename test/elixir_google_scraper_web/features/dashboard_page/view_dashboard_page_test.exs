@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraperWeb.DashboardPage.ViewDashBoardPageTest do
-  use ElixirGoogleScraperWeb.FeatureCase
+  use ElixirGoogleScraperWeb.FeatureCase, async: true
 
   @path Routes.keyword_path(ElixirGoogleScraperWeb.Endpoint, :index)
 

@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraperWeb.PasswordReset.PasswordResetTest do
-  use ElixirGoogleScraperWeb.FeatureCase
+  use ElixirGoogleScraperWeb.FeatureCase, async: true
 
   @path Routes.user_settings_path(ElixirGoogleScraperWeb.Endpoint, :edit)
 
