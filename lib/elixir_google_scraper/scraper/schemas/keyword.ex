@@ -21,4 +21,8 @@ defmodule ElixirGoogleScraper.Scraper.Schemas.Keyword do
     |> cast(attrs, [:name, :status, :user_id])
     |> validate_required([:name, :user_id])
   end
+
+  def complete_changeset(keyword) do
+    change(keyword, %{status: :completed})
+  end
 end

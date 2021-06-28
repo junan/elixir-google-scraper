@@ -6,7 +6,7 @@ defmodule ElixirGoogleScraper.Scraper.Keywords do
 
   def mark_as_completed(keyword) do
     keyword
-    |> Keyword.changeset(%{status: :completed})
+    |> Keyword.complete_changeset()
     |> Repo.update!()
   end
 end
