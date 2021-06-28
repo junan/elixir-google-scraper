@@ -12,6 +12,7 @@ defmodule ElixirGoogleScraper.Scraper do
   def paginated_user_keywords(user, params \\ %{}) do
     user
     |> user_keywords_query
+    |> filtered_keywords_query(params["name"])
     |> Repo.paginate(params)
   end
 
@@ -43,5 +44,13 @@ defmodule ElixirGoogleScraper.Scraper do
 
   defp user_keywords_query(user) do
     where(Keyword, [k], k.user_id == ^user.id)
+  end
+
+  defp filtered_keywords_query(query, nil) do
+    query
+  end
+
+  defp filtered_keywords_query(query, query_string) do
+    where(query, [k], ilike(k.name, ^"#{query_string}%"))
   end
 end

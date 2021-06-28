@@ -43,5 +43,15 @@ defmodule ElixirGoogleScraper.ScraperTest do
 
       assert length(keywords) == 12
     end
+
+    test "returns filtered user's keywords when the query string is available" do
+      user = insert(:user)
+      insert_list(2, :keyword, user: user)
+      keyword = insert(:keyword, name: "shopping", user: user)
+
+      {keywords, _} = Scraper.paginated_user_keywords(user, %{"name" => "shopping", page: 1})
+
+      assert List.first(keywords).id == keyword.id
+    end
   end
 end
