@@ -1,8 +1,8 @@
 defmodule ElixirGoogleScraper.Scraper.Keywords do
   use Ecto.Schema
 
-  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
   alias ElixirGoogleScraper.Repo
+  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
 
   def mark_as_completed(keyword) do
     keyword
