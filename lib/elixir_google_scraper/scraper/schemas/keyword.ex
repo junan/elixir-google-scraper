@@ -3,9 +3,7 @@ defmodule ElixirGoogleScraper.Scraper.Schemas.Keyword do
   import Ecto.Changeset
 
   alias ElixirGoogleScraper.Accounts.User
-  alias ElixirGoogleScraper.Repo
   alias ElixirGoogleScraper.Scraper.SearchResult
-  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
 
   schema "keywords" do
     field(:name, :string)
