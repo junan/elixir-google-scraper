@@ -5,18 +5,18 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
   @google_search_url "https://www.google.com/search"
 
   def scrape(keyword) do
-    response = make_request(keyword)
+    {_, response} = make_request(keyword)
     SearchResponseParser.parse(response.body)
   end
 
   defp make_request(keyword) do
     keyword
     |> build_url()
-    |> HTTPoison.get!(headers())
+    |> SimpleHttp.get(headers())
   end
 
   defp headers do
-    ["User-Agent": @user_agent]
+    [headers: %{ "User-Agent": @user_agent }]
   end
 
   defp build_url(keyword) do
