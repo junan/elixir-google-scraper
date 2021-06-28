@@ -1,10 +1,11 @@
-defmodule ElixirGoogleScraper.Scraper.Keyword do
+defmodule ElixirGoogleScraper.Scraper.Schemas.Keyword do
   use Ecto.Schema
   import Ecto.Changeset
 
   alias ElixirGoogleScraper.Accounts.User
   alias ElixirGoogleScraper.Repo
-  alias ElixirGoogleScraper.Scraper.{Keyword, SearchResult}
+  alias ElixirGoogleScraper.Scraper.SearchResult
+  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
 
   schema "keywords" do
     field(:name, :string)
@@ -21,11 +22,5 @@ defmodule ElixirGoogleScraper.Scraper.Keyword do
     keyword
     |> cast(attrs, [:name, :status, :user_id])
     |> validate_required([:name, :user_id])
-  end
-
-  def mark_as_completed(keyword) do
-    keyword
-    |> Keyword.changeset(%{status: :completed})
-    |> Repo.update!()
   end
 end

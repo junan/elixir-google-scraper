@@ -2,7 +2,7 @@ defmodule ElixirGoogleScraper.Scraper.SearchResult do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias ElixirGoogleScraper.Scraper.Keyword
+  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
 
   schema "search_results" do
     field(:html, :string)

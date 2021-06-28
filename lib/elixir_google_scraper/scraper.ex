@@ -7,7 +7,8 @@ defmodule ElixirGoogleScraper.Scraper do
 
   alias ElixirGoogleScraper.Accounts.User
   alias ElixirGoogleScraper.Repo
-  alias ElixirGoogleScraper.Scraper.{CSVKeyword, Keyword}
+  alias ElixirGoogleScraper.Scraper.CSVKeyword
+  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
   alias ElixirGoogleScraper.Scraper.Worker.ScrapingWorker
 
   def paginated_user_keywords(user, params \\ %{}) do

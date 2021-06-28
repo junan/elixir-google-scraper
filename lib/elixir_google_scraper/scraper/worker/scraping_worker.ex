@@ -5,7 +5,9 @@ defmodule ElixirGoogleScraper.Scraper.Worker.ScrapingWorker do
     unique: [period: 30]
 
   alias ElixirGoogleScraper.Repo
-  alias ElixirGoogleScraper.Scraper.{Keyword, KeywordScraper, SearchResult}
+  alias ElixirGoogleScraper.Scraper.Keywords
+  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
+  alias ElixirGoogleScraper.Scraper.{KeywordScraper, SearchResult}
 
   @impl Worker
   def perform(%Oban.Job{args: %{"keyword_id" => keyword_id}}) do
@@ -18,7 +20,7 @@ defmodule ElixirGoogleScraper.Scraper.Worker.ScrapingWorker do
     |> Repo.insert!()
 
     # Updating keyword status as completed
-    _ = Keyword.mark_as_completed(keyword)
+    _ = Keywords.mark_as_completed(keyword)
 
     :ok
   end
