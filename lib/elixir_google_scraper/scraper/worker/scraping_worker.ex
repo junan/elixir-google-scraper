@@ -11,16 +11,14 @@ defmodule ElixirGoogleScraper.Scraper.Worker.ScrapingWorker do
   def perform(%Oban.Job{args: %{"keyword_id" => keyword_id}}) do
     keyword = Repo.get_by!(Keyword, %{id: keyword_id})
 
-    # Scaraping google search result and storing the parsed data
+    # Scraping google search result and storing the parsed result
     keyword.name
-    |> KeywordScraper.scrap()
+    |> KeywordScraper.scrape()
     |> SearchResult.changeset(%{keyword_id: keyword.id})
     |> Repo.insert!()
 
     # Updating keyword status as completed
-    keyword
-    |> Keyword.changeset(%{status: :completed})
-    |> Repo.update!()
+    _ = Keyword.mark_as_completed(keyword)
 
     :ok
   end

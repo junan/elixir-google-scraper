@@ -1,7 +1,9 @@
 defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
   alias ElixirGoogleScraper.Scraper.SearchResponseParser
 
-  def scrap(keyword) do
+  @user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.447"
+
+  def scrape(keyword) do
     response = make_request(keyword)
     SearchResponseParser.parse(response.body)
   end
@@ -15,10 +17,7 @@ defmodule ElixirGoogleScraper.Scraper.KeywordScraper do
   end
 
   defp headers do
-    user_agent =
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.447"
-
-    ["User-Agent": user_agent]
+    ["User-Agent": @user_agent]
   end
 
   defp build_url(keyword) do
