@@ -3,8 +3,9 @@
     Search on Google by uploading CSV keywords file
   </h3>
 
-  <div class="user-keyword__box">
+  <div class="user-keyword__box g-3">
     <%= render "_form.html", assigns %>
+    <%= render "_form_search.html", assigns %>
   </div>
 
   <div class="user-keyword__list">
