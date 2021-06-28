@@ -46,7 +46,7 @@ defmodule ElixirGoogleScraper.Scraper do
     where(Keyword, [k], k.user_id == ^user.id)
   end
 
-  defp filtered_keywords_query(query, query_string) when is_nil(query_string) do
+  defp filtered_keywords_query(query, nil) do
     query
   end
 
