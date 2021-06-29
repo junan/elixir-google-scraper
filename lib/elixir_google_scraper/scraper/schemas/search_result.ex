@@ -31,7 +31,7 @@ defmodule ElixirGoogleScraper.Scraper.Schemas.SearchResult do
       :html,
       :keyword_id
     ])
-    |> validate_required([:result_count, :total_links_count, :html, :keyword_id])
+    |> validate_required([:result_count, :result_urls, :total_links_count, :html, :keyword_id])
     |> assoc_constraint(:keyword)
   end
 end
