@@ -2,7 +2,7 @@ defmodule ElixirGoogleScraper.ScraperTest do
   use ElixirGoogleScraper.DataCase, async: true
 
   alias ElixirGoogleScraper.Scraper
-  alias ElixirGoogleScraper.Scraper.Keyword
+  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
 
   describe "save_keywords/2" do
     test "stores the keywords" do

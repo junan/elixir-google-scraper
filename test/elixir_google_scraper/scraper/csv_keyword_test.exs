@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraper.Scraper.CSVKeywordTest do
-  use ElixirGoogleScraper.DataCase
+  use ElixirGoogleScraper.DataCase, async: true
 
   alias ElixirGoogleScraper.Scraper.CSVKeyword
 
