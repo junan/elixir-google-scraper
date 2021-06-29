@@ -1,0 +1,11 @@
+<%= form_for @conn, Routes.keyword_path(@conn, :index), [method: "get", class: 'row g-3'], fn f -> %>
+  <div class="input-group">
+    <%= text_input f, :name, class: "form-control", placeholder: "Search Keyword" %>
+
+    <div class="input-group-append">
+      <%= submit class: "btn btn-primary" do %>
+        <i class="fa fa-search"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>

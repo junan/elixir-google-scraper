@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraper.AccountsTest do
-  use ElixirGoogleScraper.DataCase
+  use ElixirGoogleScraper.DataCase, async: true
 
   import ElixirGoogleScraper.AccountsFixtures
   alias ElixirGoogleScraper.Accounts
