@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraper.Scraper.SearchResponseParser do
-  alias ElixirGoogleScraper.Scraper.SearchResult
+  alias ElixirGoogleScraper.Scraper.Schemas.SearchResult
 
   @selector_mapping %{
     top_ads_count: "#tads .uEierd",

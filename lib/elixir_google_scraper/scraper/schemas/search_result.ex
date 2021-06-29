@@ -1,4 +1,4 @@
-defmodule ElixirGoogleScraper.Scraper.SearchResult do
+defmodule ElixirGoogleScraper.Scraper.Schemas.SearchResult do
   use Ecto.Schema
   import Ecto.Changeset
 
