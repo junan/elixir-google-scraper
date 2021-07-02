@@ -2,9 +2,9 @@ defmodule ElixirGoogleScraper.AccountsTest do
   use ElixirGoogleScraper.DataCase, async: true
 
   import ElixirGoogleScraper.AccountsFixtures
-  alias ElixirGoogleScraper.Accounts
   alias ElixirGoogleScraper.Account.Schemas.User
   alias ElixirGoogleScraper.Account.UserToken
+  alias ElixirGoogleScraper.Accounts
 
   describe "get_user_by_email/1" do
     test "does not return the user if the email does not exist" do

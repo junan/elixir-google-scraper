@@ -2,7 +2,7 @@ defmodule ElixirGoogleScraperWeb.UserConfirmationControllerTest do
   use ElixirGoogleScraperWeb.ConnCase, async: true
 
   import ElixirGoogleScraper.AccountsFixtures
-  alias ElixirGoogleScraper.Accounts
+  alias ElixirGoogleScraper.{Account, Accounts}
   alias ElixirGoogleScraper.Account.Schemas.User
   alias ElixirGoogleScraper.Repo
 

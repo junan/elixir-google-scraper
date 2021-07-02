@@ -1,8 +1,8 @@
 defmodule ElixirGoogleScraperWeb.UserRegistrationController do
   use ElixirGoogleScraperWeb, :controller
 
-  alias ElixirGoogleScraper.Accounts
   alias ElixirGoogleScraper.Account.Schemas.User
+  alias ElixirGoogleScraper.Accounts
   alias ElixirGoogleScraperWeb.UserAuth
 
   plug :put_layout, "authentication.html"
