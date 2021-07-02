@@ -1,4 +1,4 @@
-defmodule ElixirGoogleScraper.Accounts.UserToken do
+defmodule ElixirGoogleScraper.Account.UserToken do
   use Ecto.Schema
   import Ecto.Query
 
@@ -16,7 +16,7 @@ defmodule ElixirGoogleScraper.Accounts.UserToken do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, ElixirGoogleScraper.Accounts.User
+    belongs_to :user, ElixirGoogleScraper.Account.User
 
     timestamps(updated_at: false)
   end
@@ -30,7 +30,7 @@ defmodule ElixirGoogleScraper.Accounts.UserToken do
     token = :crypto.strong_rand_bytes(@rand_size)
 
     {token,
-     %ElixirGoogleScraper.Accounts.UserToken{token: token, context: "session", user_id: user.id}}
+     %ElixirGoogleScraper.Account.UserToken{token: token, context: "session", user_id: user.id}}
   end
 
   @doc """
@@ -65,7 +65,7 @@ defmodule ElixirGoogleScraper.Accounts.UserToken do
     hashed_token = :crypto.hash(@hash_algorithm, token)
 
     {Base.url_encode64(token, padding: false),
-     %ElixirGoogleScraper.Accounts.UserToken{
+     %ElixirGoogleScraper.Account.UserToken{
        token: hashed_token,
        context: context,
        sent_to: sent_to,
@@ -125,18 +125,18 @@ defmodule ElixirGoogleScraper.Accounts.UserToken do
   Returns the given token with the given context.
   """
   def token_and_context_query(token, context) do
-    from ElixirGoogleScraper.Accounts.UserToken, where: [token: ^token, context: ^context]
+    from ElixirGoogleScraper.Account.UserToken, where: [token: ^token, context: ^context]
   end
 
   @doc """
   Gets all tokens for the given user for the given contexts.
   """
   def user_and_contexts_query(user, :all) do
-    from t in ElixirGoogleScraper.Accounts.UserToken, where: t.user_id == ^user.id
+    from t in ElixirGoogleScraper.Account.UserToken, where: t.user_id == ^user.id
   end
 
   def user_and_contexts_query(user, [_ | _] = contexts) do
-    from t in ElixirGoogleScraper.Accounts.UserToken,
+    from t in ElixirGoogleScraper.Account.UserToken,
       where: t.user_id == ^user.id and t.context in ^contexts
   end
 end

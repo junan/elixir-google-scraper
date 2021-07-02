@@ -5,7 +5,7 @@ defmodule ElixirGoogleScraper.Scraper do
 
   import Ecto.Query, warn: false
 
-  alias ElixirGoogleScraper.Accounts.User
+  alias ElixirGoogleScraper.Account.Schemas.User
   alias ElixirGoogleScraper.Repo
   alias ElixirGoogleScraper.Scraper.CSVKeyword
   alias ElixirGoogleScraper.Scraper.Schemas.Keyword

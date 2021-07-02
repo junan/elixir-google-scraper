@@ -1,4 +1,4 @@
-defmodule ElixirGoogleScraper.Accounts.User do
+defmodule ElixirGoogleScraper.Account.Schemas.User do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -116,7 +116,7 @@ defmodule ElixirGoogleScraper.Accounts.User do
   `Bcrypt.no_user_verify/0` to avoid timing attacks.
   """
   def valid_password?(
-        %ElixirGoogleScraper.Accounts.User{hashed_password: hashed_password},
+        %{hashed_password: hashed_password},
         password
       )
       when is_binary(hashed_password) and byte_size(password) > 0 do
