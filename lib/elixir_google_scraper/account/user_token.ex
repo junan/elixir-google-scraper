@@ -16,7 +16,7 @@ defmodule ElixirGoogleScraper.Account.UserToken do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, ElixirGoogleScraper.Account.User
+    belongs_to :user, ElixirGoogleScraper.Account.Schemas.User
 
     timestamps(updated_at: false)
   end
