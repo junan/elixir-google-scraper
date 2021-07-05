@@ -3,7 +3,7 @@ defmodule ElixirGoogleScraper.AccountsTest do
 
   import ElixirGoogleScraper.AccountsFixtures
   alias ElixirGoogleScraper.Account.Schemas.User
-  alias ElixirGoogleScraper.Account.UserToken
+  alias ElixirGoogleScraper.Account.Schemas.UserToken
   alias ElixirGoogleScraper.Accounts
 
   describe "get_user_by_email/1" do

@@ -5,8 +5,8 @@ defmodule ElixirGoogleScraper.Accounts do
 
   import Ecto.Query, warn: false
 
-  alias ElixirGoogleScraper.Account.Schemas.User
-  alias ElixirGoogleScraper.Account.{UserNotifier, UserToken}
+  alias ElixirGoogleScraper.Account.Schemas.{User, UserToken}
+  alias ElixirGoogleScraper.Account.UserNotifier
   alias ElixirGoogleScraper.Repo
 
   ## Database getters
