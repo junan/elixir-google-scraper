@@ -30,7 +30,7 @@ defmodule ElixirGoogleScraper.Account.Schemas.UserToken do
     token = :crypto.strong_rand_bytes(@rand_size)
 
     {token,
-     %ElixirGoogleScraper.Account.Schemas.UserToken{
+     %__MODULE__{
        token: token,
        context: "session",
        user_id: user.id
@@ -69,7 +69,7 @@ defmodule ElixirGoogleScraper.Account.Schemas.UserToken do
     hashed_token = :crypto.hash(@hash_algorithm, token)
 
     {Base.url_encode64(token, padding: false),
-     %ElixirGoogleScraper.Account.Schemas.UserToken{
+     %__MODULE__{
        token: hashed_token,
        context: context,
        sent_to: sent_to,
@@ -129,18 +129,18 @@ defmodule ElixirGoogleScraper.Account.Schemas.UserToken do
   Returns the given token with the given context.
   """
   def token_and_context_query(token, context) do
-    from ElixirGoogleScraper.Account.Schemas.UserToken, where: [token: ^token, context: ^context]
+    from __MODULE__, where: [token: ^token, context: ^context]
   end
 
   @doc """
   Gets all tokens for the given user for the given contexts.
   """
   def user_and_contexts_query(user, :all) do
-    from t in ElixirGoogleScraper.Account.Schemas.UserToken, where: t.user_id == ^user.id
+    from t in __MODULE__, where: t.user_id == ^user.id
   end
 
   def user_and_contexts_query(user, [_ | _] = contexts) do
-    from t in ElixirGoogleScraper.Account.Schemas.UserToken,
+    from t in __MODULE__,
       where: t.user_id == ^user.id and t.context in ^contexts
   end
 end
