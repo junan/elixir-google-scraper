@@ -2,7 +2,7 @@ defmodule ElixirGoogleScraper.Account.Users do
   import Ecto.Query, warn: false
 
   alias ElixirGoogleScraper.Account.Schemas.{User, UserToken}
-  alias ElixirGoogleScraper.Account.UserNotifier
+  alias ElixirGoogleScraper.Account.{UserNotifier, UserTokens}
   alias ElixirGoogleScraper.Repo
 
   def get_user_by_email(email) when is_binary(email) do
@@ -41,7 +41,7 @@ defmodule ElixirGoogleScraper.Account.Users do
   def update_user_email(user, token) do
     context = "change:#{user.email}"
 
-    with {:ok, query} <- UserToken.verify_change_email_token_query(token, context),
+    with {:ok, query} <- UserTokens.verify_change_email_token_query(token, context),
          %UserToken{sent_to: email} <- Repo.one(query),
          {:ok, _} <- Repo.transaction(user_email_multi(user, email, context)) do
       :ok
@@ -55,12 +55,12 @@ defmodule ElixirGoogleScraper.Account.Users do
 
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, changeset)
-    |> Ecto.Multi.delete_all(:tokens, UserToken.user_and_contexts_query(user, [context]))
+    |> Ecto.Multi.delete_all(:tokens, UserTokens.user_and_contexts_query(user, [context]))
   end
 
   def deliver_update_email_instructions(%User{} = user, current_email, update_email_url_fun)
       when is_function(update_email_url_fun, 1) do
-    {encoded_token, user_token} = UserToken.build_email_token(user, "change:#{current_email}")
+    {encoded_token, user_token} = UserTokens.build_email_token(user, "change:#{current_email}")
 
     Repo.insert!(user_token)
     UserNotifier.deliver_update_email_instructions(user, update_email_url_fun.(encoded_token))
@@ -78,7 +78,7 @@ defmodule ElixirGoogleScraper.Account.Users do
 
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, changeset)
-    |> Ecto.Multi.delete_all(:tokens, UserToken.user_and_contexts_query(user, :all))
+    |> Ecto.Multi.delete_all(:tokens, UserTokens.user_and_contexts_query(user, :all))
     |> Repo.transaction()
     |> case do
       {:ok, %{user: user}} -> {:ok, user}
@@ -87,18 +87,18 @@ defmodule ElixirGoogleScraper.Account.Users do
   end
 
   def generate_user_session_token(user) do
-    {token, user_token} = UserToken.build_session_token(user)
+    {token, user_token} = UserTokens.build_session_token(user)
     Repo.insert!(user_token)
     token
   end
 
   def get_user_by_session_token(token) do
-    {:ok, query} = UserToken.verify_session_token_query(token)
+    {:ok, query} = UserTokens.verify_session_token_query(token)
     Repo.one(query)
   end
 
   def delete_session_token(token) do
-    Repo.delete_all(UserToken.token_and_context_query(token, "session"))
+    Repo.delete_all(UserTokens.token_and_context_query(token, "session"))
     :ok
   end
 
@@ -107,14 +107,14 @@ defmodule ElixirGoogleScraper.Account.Users do
     if user.confirmed_at do
       {:error, :already_confirmed}
     else
-      {encoded_token, user_token} = UserToken.build_email_token(user, "confirm")
+      {encoded_token, user_token} = UserTokens.build_email_token(user, "confirm")
       Repo.insert!(user_token)
       UserNotifier.deliver_confirmation_instructions(user, confirmation_url_fun.(encoded_token))
     end
   end
 
   def confirm_user(token) do
-    with {:ok, query} <- UserToken.verify_email_token_query(token, "confirm"),
+    with {:ok, query} <- UserTokens.verify_email_token_query(token, "confirm"),
          %User{} = user <- Repo.one(query),
          {:ok, %{user: user}} <- Repo.transaction(confirm_user_multi(user)) do
       {:ok, user}
@@ -126,18 +126,18 @@ defmodule ElixirGoogleScraper.Account.Users do
   defp confirm_user_multi(user) do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, User.confirm_changeset(user))
-    |> Ecto.Multi.delete_all(:tokens, UserToken.user_and_contexts_query(user, ["confirm"]))
+    |> Ecto.Multi.delete_all(:tokens, UserTokens.user_and_contexts_query(user, ["confirm"]))
   end
 
   def deliver_user_reset_password_instructions(%User{} = user, reset_password_url_fun)
       when is_function(reset_password_url_fun, 1) do
-    {encoded_token, user_token} = UserToken.build_email_token(user, "reset_password")
+    {encoded_token, user_token} = UserTokens.build_email_token(user, "reset_password")
     Repo.insert!(user_token)
     UserNotifier.deliver_reset_password_instructions(user, reset_password_url_fun.(encoded_token))
   end
 
   def get_user_by_reset_password_token(token) do
-    with {:ok, query} <- UserToken.verify_email_token_query(token, "reset_password"),
+    with {:ok, query} <- UserTokens.verify_email_token_query(token, "reset_password"),
          %User{} = user <- Repo.one(query) do
       user
     else
@@ -148,7 +148,7 @@ defmodule ElixirGoogleScraper.Account.Users do
   def reset_user_password(user, attrs) do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, User.password_changeset(user, attrs))
-    |> Ecto.Multi.delete_all(:tokens, UserToken.user_and_contexts_query(user, :all))
+    |> Ecto.Multi.delete_all(:tokens, UserTokens.user_and_contexts_query(user, :all))
     |> Repo.transaction()
     |> case do
       {:ok, %{user: user}} -> {:ok, user}
