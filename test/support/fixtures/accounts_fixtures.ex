@@ -1,7 +1,7 @@
 defmodule ElixirGoogleScraper.AccountsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `ElixirGoogleScraper.Accounts` context.
+  entities via the `ElixirGoogleScraper.Users` context.
   """
 
   def unique_user_email, do: "user#{System.unique_integer()}@example.com"
@@ -18,7 +18,7 @@ defmodule ElixirGoogleScraper.AccountsFixtures do
     {:ok, user} =
       attrs
       |> valid_user_attributes()
-      |> ElixirGoogleScraper.Accounts.register_user()
+      |> ElixirGoogleScraper.Account.Users.register_user()
 
     user
   end
