@@ -1,5 +1,6 @@
 defmodule ElixirGoogleScraperWeb.Router do
   use ElixirGoogleScraperWeb, :router
+  use PhoenixOauth2Provider.Router, otp_app: :elixir_google_scraper
 
   import ElixirGoogleScraperWeb.UserAuth
 
@@ -16,9 +17,26 @@ defmodule ElixirGoogleScraperWeb.Router do
   pipeline :api do
     plug(:accepts, ["json"])
 
-    scope "/api/v1", LivemanWeb, as: :api_v1 do
-      get("/oauth/token", Api.V1.TokenController, :show)
+    scope "/api/v1", ElixirGoogleScraperWeb, as: :api_v1 do
+      post("/oauth/token", Api.V1.TokenController, :show)
     end
+  end
+
+  # API routes
+  pipeline :protected do
+    # Require user authentication
+  end
+
+  scope "/" do
+    pipe_through(:api)
+
+    oauth_api_routes()
+  end
+
+  scope "/" do
+    pipe_through([:browser, :protected])
+
+    oauth_routes()
   end
 
   # coveralls-ignore-stop
