@@ -18,7 +18,7 @@ defmodule ElixirGoogleScraperWeb.Router do
     plug(:accepts, ["json"])
 
     scope "/api/v1", ElixirGoogleScraperWeb, as: :api_v1 do
-      post("/oauth/token", Api.V1.TokenController, :show)
+      post("/oauth/token", Api.V1.TokenController, :create)
     end
   end
 

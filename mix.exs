@@ -70,7 +70,8 @@ defmodule ElixirGoogleScraper.MixProject do
       {:httpoison, "~> 1.8"},
       {:faker, "~> 0.16", only: :test},
       {:ex_oauth2_provider, "~> 0.5.6"},
-      {:phoenix_oauth2_provider, "~> 0.5.1"}
+      {:phoenix_oauth2_provider, "~> 0.5.1"},
+      {:jsonapi, "~> 1.3"}
     ]
   end
 

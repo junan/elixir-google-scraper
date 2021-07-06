@@ -16,6 +16,12 @@ defmodule ElixirGoogleScraper.Account.Users do
 
   def get_user!(id), do: Repo.get!(User, id)
 
+  def authenticate(username, password) do
+    User
+    |> Repo.get_by(email: username)
+    |> verify_password(password)
+  end
+
   def register_user(attrs) do
     %User{}
     |> User.registration_changeset(attrs)
@@ -152,6 +158,14 @@ defmodule ElixirGoogleScraper.Account.Users do
     |> case do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
+    end
+  end
+
+  defp verify_password(user, password) do
+    if User.valid_password?(user, password) do
+      {:ok, user}
+    else
+      {:error, :invalid_password}
     end
   end
 end
