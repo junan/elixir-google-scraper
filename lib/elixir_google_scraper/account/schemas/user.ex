@@ -116,7 +116,7 @@ defmodule ElixirGoogleScraper.Account.Schemas.User do
   `Bcrypt.no_user_verify/0` to avoid timing attacks.
   """
   def valid_password?(
-        %ElixirGoogleScraper.Account.Schemas.User{hashed_password: hashed_password},
+        %__MODULE__{hashed_password: hashed_password},
         password
       )
       when is_binary(hashed_password) and byte_size(password) > 0 do
