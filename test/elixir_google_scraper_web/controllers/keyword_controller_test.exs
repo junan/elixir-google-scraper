@@ -62,6 +62,35 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
         |> log_in_user(user)
         |> get(Routes.keyword_path(conn, :show, keyword.id))
 
+      assert html_response(conn, 200) =~ keyword.name
+    end
+
+    test "assigns the keyword", %{conn: conn} do
+      user = insert(:user)
+      keyword = insert(:keyword, user: user, status: :completed)
+      insert(:search_result, keyword: keyword)
+      keyword_id = keyword.id
+
+      conn =
+        conn
+        |> log_in_user(user)
+        |> get(Routes.keyword_path(conn, :show, keyword_id))
+
+      assert %Keyword{id: ^keyword_id} = conn.assigns[:keyword]
+    end
+  end
+
+  describe "GET html/2" do
+    test "returns 200 status code", %{conn: conn} do
+      user = insert(:user)
+      keyword = insert(:keyword, user: user, status: :completed)
+      insert(:search_result, keyword: keyword)
+
+      conn =
+        conn
+        |> log_in_user(user)
+        |> get(Routes.keyword_html_path(conn, :html, keyword.id))
+
       assert html_response(conn, 200) =~ "https://nimblehq.co/"
     end
 
@@ -74,9 +103,9 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
       conn =
         conn
         |> log_in_user(user)
-        |> get(Routes.keyword_path(conn, :show, keyword.id))
+        |> get(Routes.keyword_html_path(conn, :html, keyword.id))
 
-      assert %Keyword{id: ^keyword.id} = conn.assigns[:keyword]
+      assert %Keyword{id: ^keyword_id} = conn.assigns[:keyword]
     end
   end
 end
