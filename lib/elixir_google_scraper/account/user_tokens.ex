@@ -34,19 +34,6 @@ defmodule ElixirGoogleScraper.Account.UserTokens do
     {:ok, query}
   end
 
-  @spec build_email_token(atom | %{:email => any, :id => any, optional(any) => any}, any) ::
-          {binary,
-           %ElixirGoogleScraper.Account.Schemas.UserToken{
-             __meta__: Ecto.Schema.Metadata.t(),
-             context: any,
-             id: nil,
-             inserted_at: nil,
-             sent_to: any,
-             token: binary,
-             user: Ecto.Association.NotLoaded.t(),
-             user_id: any
-           }}
-
   def build_email_token(user, context) do
     build_hashed_token(user, context, user.email)
   end
