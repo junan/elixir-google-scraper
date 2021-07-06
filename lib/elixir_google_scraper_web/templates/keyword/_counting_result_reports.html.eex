@@ -14,7 +14,7 @@
     </tr>
     <tr>
       <th>Total Result Count:</th>
-      <td><%= @keyword.search_result.total_links_count %></td>
+      <td><%= @keyword.search_result.result_count %></td>
     </tr>
   </tbody>
 </table>

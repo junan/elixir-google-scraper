@@ -4,7 +4,7 @@
   }
 
   &__panel {
-    padding: 25px;
+    padding: rem(25px);
     border: 1px solid rgba(0, 0, 0, 0.125);
     @include make-col(12);
 
@@ -14,6 +14,6 @@
   }
 
   &__item {
-    max-width: 400px;
+    max-width: rem(400px);
   }
 }
