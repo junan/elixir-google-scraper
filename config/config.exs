@@ -31,6 +31,11 @@ config :elixir_google_scraper, Oban,
   plugins: [Oban.Plugins.Pruner],
   queues: [default: 10]
 
+config :elixir_google_scraper, ExOauth2Provider,
+  repo: ElixirGoogleScraper.Repo,
+  resource_owner: ElixirGoogleScraper.Account.Schemas.User,
+  password_auth: {Auth, :authenticate}
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

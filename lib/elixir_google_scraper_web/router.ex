@@ -15,6 +15,10 @@ defmodule ElixirGoogleScraperWeb.Router do
   # coveralls-ignore-start
   pipeline :api do
     plug(:accepts, ["json"])
+
+    scope "/api/v1", LivemanWeb, as: :api_v1 do
+      get("/token", Api.V1.TokenController, :show)
+    end
   end
 
   # coveralls-ignore-stop
