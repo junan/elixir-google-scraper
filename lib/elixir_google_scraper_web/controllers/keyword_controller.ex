@@ -1,6 +1,8 @@
 defmodule ElixirGoogleScraperWeb.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
+  alias ElixirGoogleScraper.Repo
+  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
   alias ElixirGoogleScraper.Scraper.Keywords
 
   def index(conn, params) do
@@ -25,5 +27,11 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
     conn
     |> put_flash(flash_type, flash_message)
     |> redirect(to: Routes.keyword_path(conn, :index))
+  end
+
+  def show(conn, %{"id" => id}) do
+    keyword = Repo.get_by(Keyword, %{id: id})
+
+    render(conn, "show.html", keyword: Repo.preload(keyword, :search_result))
   end
 end

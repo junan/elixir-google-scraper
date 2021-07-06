@@ -1,0 +1,20 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Top Advertisers Count:</th>
+      <td><%= @keyword.search_result.top_ads_count %></td>
+    </tr>
+    <tr>
+      <th>Total Advertisers Count:</th>
+      <td><%= @keyword.search_result.total_ads_count %></td>
+    </tr>
+    <tr>
+      <th>Total Link Count:</th>
+      <td><%= @keyword.search_result.total_links_count %></td>
+    </tr>
+    <tr>
+      <th>Total Result Count:</th>
+      <td><%= @keyword.search_result.total_links_count %></td>
+    </tr>
+  </tbody>
+</table>

@@ -5,6 +5,7 @@
         <th>Keyword</th>
         <th>Search Completed</th>
         <th>Created At</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -13,6 +14,9 @@
           <td class="align-middle"><%= keyword.name %></td>
           <td class="align-middle"><%= keyword.status %></td>
           <td class="align-middle"><%= keyword.inserted_at %></td>
+          <td class="align-middle">
+            <%= link "show", class: "btn btn-primary btn-sm", to: Routes.keyword_path(@conn, :show, keyword.id) %>
+          </td>
         </tr>
       <% end %>
     </tbody>
