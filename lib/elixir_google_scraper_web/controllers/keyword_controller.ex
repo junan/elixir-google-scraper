@@ -1,17 +1,17 @@
 defmodule ElixirGoogleScraperWeb.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
-  alias ElixirGoogleScraper.Scraper
+  alias ElixirGoogleScraper.Scraper.Keywords
 
   def index(conn, params) do
-    {keywords, pagination} = Scraper.paginated_user_keywords(conn.assigns[:current_user], params)
+    {keywords, pagination} = Keywords.paginated_user_keywords(conn.assigns[:current_user], params)
 
     render(conn, "index.html", keywords: keywords, pagination: pagination)
   end
 
   def create(conn, %{"file" => %Plug.Upload{} = file}) do
     {flash_type, flash_message} =
-      case Scraper.save_keywords(file, conn.assigns.current_user) do
+      case Keywords.save_keywords(file, conn.assigns.current_user) do
         :ok ->
           {:info, "Your CSV file has been uploaded successfully"}
 

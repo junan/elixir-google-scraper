@@ -1,7 +1,7 @@
 defmodule ElixirGoogleScraperWeb.UserSessionController do
   use ElixirGoogleScraperWeb, :controller
 
-  alias ElixirGoogleScraper.Accounts
+  alias ElixirGoogleScraper.Account.Users
   alias ElixirGoogleScraperWeb.UserAuth
 
   plug :put_layout, "authentication.html"
@@ -13,7 +13,7 @@ defmodule ElixirGoogleScraperWeb.UserSessionController do
   def create(conn, %{"user" => user_params}) do
     %{"email" => email, "password" => password} = user_params
 
-    if user = Accounts.get_user_by_email_and_password(email, password) do
+    if user = Users.get_user_by_email_and_password(email, password) do
       UserAuth.log_in_user(conn, user, user_params)
     else
       render(conn, "new.html", error_message: "Invalid email or password")

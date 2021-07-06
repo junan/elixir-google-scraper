@@ -18,6 +18,7 @@ defmodule ElixirGoogleScraperWeb.ConnCase do
   use ExUnit.CaseTemplate
 
   alias Ecto.Adapters.SQL.Sandbox
+  alias ElixirGoogleScraper.Account.Users
 
   using do
     quote do
@@ -65,7 +66,7 @@ defmodule ElixirGoogleScraperWeb.ConnCase do
   It returns an updated `conn`.
   """
   def log_in_user(conn, user) do
-    token = ElixirGoogleScraper.Accounts.generate_user_session_token(user)
+    token = Users.generate_user_session_token(user)
 
     conn
     |> Phoenix.ConnTest.init_test_session(%{})

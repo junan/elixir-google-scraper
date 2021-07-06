@@ -1,7 +1,7 @@
 defmodule ElixirGoogleScraperWeb.UserSettingsController do
   use ElixirGoogleScraperWeb, :controller
 
-  alias ElixirGoogleScraper.Accounts
+  alias ElixirGoogleScraper.Account.Users
   alias ElixirGoogleScraperWeb.UserAuth
 
   plug(:assign_password_changesets)
@@ -14,7 +14,7 @@ defmodule ElixirGoogleScraperWeb.UserSettingsController do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
 
-    case Accounts.update_user_password(user, password, user_params) do
+    case Users.update_user_password(user, password, user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Password updated successfully.")
@@ -29,6 +29,6 @@ defmodule ElixirGoogleScraperWeb.UserSettingsController do
   defp assign_password_changesets(conn, _opts) do
     user = conn.assigns.current_user
 
-    assign(conn, :password_changeset, Accounts.change_user_password(user))
+    assign(conn, :password_changeset, Users.change_user_password(user))
   end
 end

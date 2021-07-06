@@ -2,7 +2,7 @@ defmodule ElixirGoogleScraper.Scraper.Schemas.Keyword do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias ElixirGoogleScraper.Accounts.User
+  alias ElixirGoogleScraper.Account.Schemas.User
   alias ElixirGoogleScraper.Scraper.Schemas.SearchResult
 
   schema "keywords" do
