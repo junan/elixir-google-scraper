@@ -2,8 +2,8 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
   alias ElixirGoogleScraper.Repo
-  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
   alias ElixirGoogleScraper.Scraper.Keywords
+  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
 
   def index(conn, params) do
     {keywords, pagination} = Keywords.paginated_user_keywords(conn.assigns[:current_user], params)
