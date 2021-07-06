@@ -28,12 +28,6 @@ defmodule ElixirGoogleScraperWeb.Router do
   end
 
   scope "/" do
-    pipe_through(:api)
-
-    oauth_api_routes()
-  end
-
-  scope "/" do
     pipe_through([:browser, :protected])
 
     oauth_routes()

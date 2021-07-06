@@ -9,6 +9,4 @@ defmodule ElixirGoogleScraperWeb.V1.TokenView do
       :token_type
     ]
   end
-
-  def type, do: "not-included"
 end
