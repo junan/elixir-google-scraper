@@ -17,7 +17,7 @@ defmodule ElixirGoogleScraperWeb.Router do
     plug(:accepts, ["json"])
 
     scope "/api/v1", LivemanWeb, as: :api_v1 do
-      get("/token", Api.V1.TokenController, :show)
+      get("/oauth/token", Api.V1.TokenController, :show)
     end
   end
 
