@@ -20,7 +20,7 @@ defmodule ElixirGoogleScraperWeb.Router do
   # coveralls-ignore-stop
 
   scope "/", ElixirGoogleScraperWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
     get("/", PageController, :index)
   end
@@ -69,7 +69,9 @@ defmodule ElixirGoogleScraperWeb.Router do
     get("/users/settings", UserSettingsController, :edit)
     put("/users/settings", UserSettingsController, :update)
 
-    resources "/keywords", KeywordController, only: [:index, :create, :show]
+    resources "/keywords", KeywordController, only: [:index, :create, :show] do
+      get("/html_response", KeywordController, :html, as: :html)
+    end
   end
 
   scope "/", ElixirGoogleScraperWeb do

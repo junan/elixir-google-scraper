@@ -1,4 +1,4 @@
-<%= unless @keyword.status == "completed" do %>
+<%= if @keyword.status == :completed do %>
   <div class="keyword-detail">
     <h2 class="keyword-detail__title">
       Search result report for : <%= @keyword.name %>
@@ -7,6 +7,10 @@
     <div class="keyword-detail__body">
       <%= render "_counting_result_reports.html", assigns %>
       <%= render "_url_result_report.html", assigns %>
+    </div>
+
+    <div class="keyword-detail__footer text-center mt-3">
+      <%= link "Render Search Result HTML", class: "btn btn-primary", to: Routes.keyword_html_path(@conn, :html, @keyword.id) %>
     </div>
   </div>
 <% else %>

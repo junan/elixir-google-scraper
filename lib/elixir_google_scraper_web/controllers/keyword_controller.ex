@@ -34,4 +34,10 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
 
     render(conn, "show.html", keyword: Repo.preload(keyword, :search_result))
   end
+
+  def html(conn, %{"keyword_id" => id}) do
+    keyword = Repo.get_by(Keyword, %{id: id})
+
+    render(conn, "html_response.html", keyword: Repo.preload(keyword, :search_result))
+  end
 end
