@@ -3,6 +3,8 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
 
   alias ElixirGoogleScraper.Scraper.Keywords
 
+  plug(:redirect_to_dashboard_if_no_keyword when action in [:show, :html])
+
   def index(conn, params) do
     {keywords, pagination} = Keywords.paginated_user_keywords(conn.assigns[:current_user], params)
 
