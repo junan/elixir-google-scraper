@@ -1,5 +1,5 @@
 defmodule ElixirGoogleScraperWeb.V1.KeywordView do
-  use JSONAPI.View, type: "token"
+  use JSONAPI.View, type: "keyword"
 
   def fields do
     [

@@ -4,13 +4,95 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   alias ExOauth2Provider.AccessTokens
   alias ExOauth2Provider.Applications
 
+  describe "GET index/2" do
+    test "returrns 201 status with list of keywords", %{conn: conn} do
+      user = insert(:user)
+      attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
+      insert_list(2, :keyword, user: user)
+
+      {_, oauth_app} =
+        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+
+      {_, acess_token} =
+        AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
+
+      conn =
+        conn
+        |> put_req_header("authorization", "Bearer " <> acess_token.token)
+        |> get(Routes.api_v1_keyword_path(conn, :index))
+
+      assert %{
+               "data" => [
+                 %{
+                   "attributes" => %{
+                     "name" => _,
+                     "inserted_at" => _,
+                     "status" => _
+                   },
+                   "id" => _,
+                   "relationships" => %{},
+                   "type" => "keyword"
+                 },
+                 %{
+                   "attributes" => %{
+                     "name" => _,
+                     "inserted_at" => _,
+                     "status" => _
+                   },
+                   "id" => _,
+                   "relationships" => %{},
+                   "type" => "keyword"
+                 }
+               ],
+               "included" => [],
+               "meta" => %{"page" => _, "page_size" => _, "pages" => _, "records" => _}
+             } = json_response(conn, 200)
+    end
+
+    test "returrns only matched keywords when search params are present", %{conn: conn} do
+      user = insert(:user)
+      attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
+      insert(:keyword, name: "Bangkok", user: user)
+      insert(:keyword, name: "Phuket", user: user)
+
+      {_, oauth_app} =
+        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+
+      {_, acess_token} =
+        AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
+
+      conn =
+        conn
+        |> put_req_header("authorization", "Bearer " <> acess_token.token)
+        |> get(Routes.api_v1_keyword_path(conn, :index, name: "Bangkok"))
+
+      assert %{
+               "data" => [
+                 %{
+                   "attributes" => %{
+                     "name" => "Bangkok",
+                     "inserted_at" => _,
+                     "status" => _
+                   },
+                   "id" => _,
+                   "relationships" => %{},
+                   "type" => "keyword"
+                 }
+               ],
+               "included" => [],
+               "meta" => %{"page" => _, "page_size" => _, "pages" => _, "records" => _}
+             } = json_response(conn, 200)
+    end
+  end
+
   describe "POST create/2" do
     test "returns 201 status with empty response body when the token is valid", %{conn: conn} do
       user = insert(:user)
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
 
-      {_, oauth_app} = Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+      {_, oauth_app} =
+        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
 
       {_, acess_token} =
         AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
@@ -42,7 +124,8 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}
 
-      {_, oauth_app} = Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+      {_, oauth_app} =
+        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
 
       {_, acess_token} =
         AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
@@ -62,7 +145,8 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/large_keywords.csv"}
 
-      {_, oauth_app} = Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+      {_, oauth_app} =
+        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
 
       {_, acess_token} =
         AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
