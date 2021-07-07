@@ -49,13 +49,13 @@ defmodule ElixirGoogleScraper.UsersTest do
   end
 
   describe "authenticate/2" do
-    test "authenticates successfully when the credential is valid" do
+    test "authenticates successfully when the credentialsare valid" do
       user = insert(:user)
 
       assert {:ok, user} == Users.authenticate(user.email, "secret-password")
     end
 
-    test "authenticates unsuccessfully when the credential is invalid" do
+    test "authenticates unsuccessfully when the credential are invalid" do
       user = insert(:user)
 
       assert {:error, :invalid_password} == Users.authenticate(user.email, "invalid-password")
