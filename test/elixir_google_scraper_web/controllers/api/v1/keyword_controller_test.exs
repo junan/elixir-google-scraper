@@ -10,8 +10,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
 
-      {_, oauth_app} =
-        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+      {_, oauth_app} = Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
 
       {_, acess_token} =
         AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
@@ -43,8 +42,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}
 
-      {_, oauth_app} =
-        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+      {_, oauth_app} = Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
 
       {_, acess_token} =
         AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
@@ -64,8 +62,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/large_keywords.csv"}
 
-      {_, oauth_app} =
-        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+      {_, oauth_app} = Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
 
       {_, acess_token} =
         AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
