@@ -38,7 +38,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
              }
     end
 
-    test "returrns 422 status with an error when the param is invalid", %{conn: conn} do
+    test "returrns 422 status with an error when keywords are empty", %{conn: conn} do
       user = insert(:user)
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}
@@ -56,6 +56,27 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
       assert json_response(conn, 422) == %{
                "errors" => [%{"detail" => "File cant be empty"}]
+             }
+    end
+
+    test "returrns 422 status with an error when keywords are more than 1000", %{conn: conn} do
+      user = insert(:user)
+      attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
+      file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/large_keywords.csv"}
+
+      {_, oauth_app} =
+        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+
+      {_, acess_token} =
+        AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
+
+      conn =
+        conn
+        |> put_req_header("authorization", "Bearer " <> acess_token.token)
+        |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
+
+      assert json_response(conn, 422) == %{
+               "errors" => [%{"detail" => "CSV Keywords count can't be more than 1000"}]
              }
     end
   end

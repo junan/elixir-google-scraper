@@ -13,18 +13,13 @@ defmodule ElixirGoogleScraperWeb.Router do
     plug(:fetch_current_user)
   end
 
-  pipeline :protected do
-    scope "/api/v1", ElixirGoogleScraperWeb, as: :api_v1 do
-      resources("/keywords", Api.V1.KeywordController, only: [:create])
-    end
-  end
-
   # coveralls-ignore-start
   pipeline :api do
     plug(:accepts, ["json"])
 
     scope "/api/v1", ElixirGoogleScraperWeb, as: :api_v1 do
       post("/oauth/token", Api.V1.TokenController, :create)
+      resources("/keywords", Api.V1.KeywordController, only: [:create])
     end
   end
 
