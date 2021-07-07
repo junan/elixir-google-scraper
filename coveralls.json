@@ -6,6 +6,7 @@
     "lib/elixir_google_scraper_web.ex",
     "lib/elixir_google_scraper_mail.ex",
     "lib/elixir_google_scraper_web/endpoint.ex",
+    "lib/elixir_google_scraper/oauth_access_grants/oauth_access_grant.ex",
     "lib/elixir_google_scraper_web/views/error_helpers.ex",
     "test/support"
   ],
