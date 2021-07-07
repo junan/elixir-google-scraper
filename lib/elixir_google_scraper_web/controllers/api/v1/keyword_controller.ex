@@ -3,6 +3,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
 
   alias ElixirGoogleScraper.Scraper.Keywords
   alias ElixirGoogleScraperWeb.V1.{ErrorView, KeywordView}
+  alias ElixirGoogleScraperWeb.V1.KeywordSearchResultView
 
   def index(conn, params) do
     {keywords, pagination} = Keywords.paginated_user_keywords(conn.assigns.current_user, params)
@@ -35,6 +36,18 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
         |> render(ErrorView, "error.json",
           errors: [%{detail: "CSV Keywords count can't be more than 1000"}]
         )
+    end
+  end
+
+  def show(conn, %{"id" => id}) do
+    keyword = Keywords.get_keyword(id)
+
+    if keyword do
+      render(conn, KeywordSearchResultView, "show.json", %{data: keyword.search_result})
+    else
+      conn
+      |> put_status(:not_found)
+      |> render(ErrorView, "error.json", errors: [%{detail: "Keyword not found"}])
     end
   end
 
