@@ -22,13 +22,8 @@ defmodule ElixirGoogleScraperWeb.Router do
     end
   end
 
-  # API routes
-  pipeline :protected do
-    # Require user authentication
-  end
-
   scope "/" do
-    pipe_through([:browser, :protected])
+    pipe_through([:browser, :require_authenticated_user])
 
     oauth_routes()
   end
