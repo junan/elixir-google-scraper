@@ -65,4 +65,26 @@ defmodule ElixirGoogleScraper.Scraper.KeywordsTest do
       assert List.first(keywords).id == keyword.id
     end
   end
+
+  describe "get_keyword/1" do
+    test "returns the keyword with preloded search result when the ID is valid" do
+      user = insert(:user)
+      keyword = insert(:keyword, user: user)
+      search_result = insert(:search_result, keyword: keyword)
+
+      result = Keywords.get_keyword(keyword.id)
+
+      assert result.id == keyword.id
+      assert result.search_result.id == search_result.id
+    end
+
+    test "returns nil when the ID is invalid" do
+      user = insert(:user)
+      keyword = insert(:keyword, user: user)
+
+      result = Keywords.get_keyword(keyword.id + 1)
+
+      assert result == nil
+    end
+  end
 end

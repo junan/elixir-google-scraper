@@ -15,5 +15,6 @@
 
   &__item {
     max-width: rem(400px);
+    @extend .d-inline-block, .text-truncate;
   }
 }

@@ -34,7 +34,7 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
       assert get_flash(conn, :info) == "Your CSV file has been uploaded successfully"
     end
 
-    test "renders error message when CVS file is empty", %{
+    test "renders error message when CSV file is empty", %{
       conn: conn
     } do
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}
@@ -78,6 +78,17 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
 
       assert %Keyword{id: ^keyword_id} = conn.assigns[:keyword]
     end
+
+    test "redirects to the keywords dashboad page if the keyword is not found", %{conn: conn} do
+      user = insert(:user)
+
+      conn =
+        conn
+        |> log_in_user(user)
+        |> get(Routes.keyword_path(conn, :show, 100))
+
+      assert redirected_to(conn) == "/keywords"
+    end
   end
 
   describe "GET html/2" do
@@ -107,5 +118,16 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
 
       assert %Keyword{id: ^keyword_id} = conn.assigns[:keyword]
     end
+  end
+
+  test "redirects to the keywords dashboad page if the keyword is not found", %{conn: conn} do
+    user = insert(:user)
+
+    conn =
+      conn
+      |> log_in_user(user)
+      |> get(Routes.keyword_html_path(conn, :html, 100))
+
+    assert redirected_to(conn) == "/keywords"
   end
 end

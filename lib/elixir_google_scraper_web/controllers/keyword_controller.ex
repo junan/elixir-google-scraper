@@ -1,9 +1,9 @@
 defmodule ElixirGoogleScraperWeb.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
-  alias ElixirGoogleScraper.Repo
   alias ElixirGoogleScraper.Scraper.Keywords
-  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
+
+  plug(:redirect_to_dashboard_if_no_keyword when action in [:show, :html])
 
   def index(conn, params) do
     {keywords, pagination} = Keywords.paginated_user_keywords(conn.assigns[:current_user], params)
@@ -29,15 +29,25 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
     |> redirect(to: Routes.keyword_path(conn, :index))
   end
 
-  def show(conn, %{"id" => id}) do
-    keyword = Repo.get_by(Keyword, %{id: id})
-
-    render(conn, "show.html", keyword: Repo.preload(keyword, :search_result))
+  def show(conn, _) do
+    render(conn, "show.html", keyword: conn.assigns[:keyword])
   end
 
-  def html(conn, %{"keyword_id" => id}) do
-    keyword = Repo.get_by(Keyword, %{id: id})
+  def html(conn, _) do
+    render(conn, "html_response.html", keyword: conn.assigns[:keyword])
+  end
 
-    render(conn, "html_response.html", keyword: Repo.preload(keyword, :search_result))
+  def redirect_to_dashboard_if_no_keyword(conn, _) do
+    keyword = Keywords.get_keyword(conn.params["id"] || conn.params["keyword_id"])
+
+    if keyword == nil do
+      conn
+      |> redirect(to: "/keywords")
+      |> halt()
+    else
+      # Assigning keyword to the connection so that we dont have to search it again later
+      conn = assign(conn, :keyword, keyword)
+      conn
+    end
   end
 end
