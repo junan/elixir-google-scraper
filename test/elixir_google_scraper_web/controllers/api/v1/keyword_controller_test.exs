@@ -1,5 +1,6 @@
 defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   use ElixirGoogleScraperWeb.ConnCase, async: true
+  use ElixirGoogleScraperWeb.ApiCase, async: true
 
   alias ExOauth2Provider.AccessTokens
   alias ExOauth2Provider.Applications
@@ -88,19 +89,10 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   describe "POST create/2" do
     test "returns 201 status with empty response body when the token is valid", %{conn: conn} do
       user = insert(:user)
-      attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
+      target = Routes.api_v1_keyword_path(conn, :create)
 
-      {_, oauth_app} =
-        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
-
-      {_, acess_token} =
-        AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
-
-      conn =
-        conn
-        |> put_req_header("authorization", "Bearer " <> acess_token.token)
-        |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
+      conn = authenticated_request(user, conn, target, :post, %{file: file})
 
       assert conn.status == 201
       assert conn.resp_body == ""
