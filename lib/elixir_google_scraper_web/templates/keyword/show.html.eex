@@ -1,4 +1,4 @@
-<%= if @keyword.status == :completed do %>
+<%= if @keyword && @keyword.status == :completed do %>
   <div class="keyword-detail">
     <h2 class="keyword-detail__title">
       Search result report for : <%= @keyword.name %>
