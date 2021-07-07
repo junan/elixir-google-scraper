@@ -14,7 +14,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.TokenController do
       {:error, _, _} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(ErrorView, "error.json", errors: [%{detail: "Authentiocation failed"}])
+        |> render(ErrorView, "error.json", errors: [%{detail: "Authentication failed"}])
     end
   end
 end

@@ -60,7 +60,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.TokenControllerTest do
         })
 
       assert json_response(conn, 422) == %{
-               "errors" => [%{"detail" => "Authentiocation failed"}]
+               "errors" => [%{"detail" => "Authentication failed"}]
              }
     end
   end
