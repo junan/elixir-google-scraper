@@ -5,7 +5,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   alias ExOauth2Provider.Applications
 
   describe "POST create/2" do
-    test "returrns 201 status with empty body when the token is valid", %{conn: conn} do
+    test "returrns 201 status with empty response body when the token is valid", %{conn: conn} do
       user = insert(:user)
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
