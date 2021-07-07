@@ -129,7 +129,7 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
     end
   end
 
-  test "redirects to the keywords dashboad page if the keyword is not found", %{conn: conn} do
+  test "redirects to the keywords dashboard page if the keyword is not found", %{conn: conn} do
     user = insert(:user)
 
     conn =
