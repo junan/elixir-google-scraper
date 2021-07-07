@@ -1,12 +1,8 @@
 defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
-  alias ElixirGoogleScraper.Repo
   alias ElixirGoogleScraperWeb.V1.ErrorView
   alias ElixirGoogleScraper.Scraper.Keywords
-  alias ElixirGoogleScraper.Account.Schemas.User
-
-  import Ecto.Query
 
   plug(ExOauth2Provider.Plug.VerifyHeader, otp_app: :elixir_google_scraper, realm: "Bearer")
 
