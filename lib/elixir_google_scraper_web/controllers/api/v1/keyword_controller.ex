@@ -8,15 +8,16 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
 
   import Ecto.Query
 
-  plug ExOauth2Provider.Plug.VerifyHeader, otp_app: :elixir_google_scraper, realm: "Bearer"
+  plug(ExOauth2Provider.Plug.VerifyHeader, otp_app: :elixir_google_scraper, realm: "Bearer")
 
-  plug ExOauth2Provider.Plug.EnsureAuthenticated,
+  plug(ExOauth2Provider.Plug.EnsureAuthenticated,
     handler: ElixirGoogleScraperWeb.Api.ErrorHandler
+  )
 
   def create(conn, %{"file" => %Plug.Upload{} = file}) do
-    user = User |> first() |> Repo.one()
+    token = ExOauth2Provider.Plug.current_access_token(conn)
 
-    case Keywords.save_keywords(file, user) do
+    case Keywords.save_keywords(file, token.resource_owner) do
       :ok ->
         conn
         |> put_resp_header("content-type", "application/json")
