@@ -4,6 +4,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
   alias ElixirGoogleScraper.Scraper.Keywords
   alias ElixirGoogleScraperWeb.V1.{ErrorView, KeywordView}
   alias ElixirGoogleScraperWeb.V1.KeywordSearchResultView
+  alias ElixirGoogleScraperWeb.V1.KeywordView
 
   def index(conn, params) do
     {keywords, pagination} = Keywords.paginated_user_keywords(conn.assigns.current_user, params)
