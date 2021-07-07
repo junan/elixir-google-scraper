@@ -1,4 +1,4 @@
-<%= if @keyword && @keyword.status == :completed do %>
+<%= if @keyword.status == :completed do %>
   <iframe srcdoc="<%= @keyword.search_result.html %>"></iframe>
 <% else %>
   <h4 class="text-center">No search result for: <%= @keyword.name %></h4>
