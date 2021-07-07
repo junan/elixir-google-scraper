@@ -3,6 +3,14 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
 
   alias ElixirGoogleScraper.Scraper.Keywords
   alias ElixirGoogleScraperWeb.V1.ErrorView
+  alias ElixirGoogleScraperWeb.V1.KeywordView
+
+  def index(conn, params) do
+    token = ExOauth2Provider.Plug.current_access_token(conn)
+    {keywords, pagination} = Keywords.paginated_user_keywords(token.resource_owner, params)
+
+    render(conn, KeywordView, "index.json", %{data: keywords, meta: meta_data(pagination)})
+  end
 
   def create(conn, %{"file" => %Plug.Upload{} = file}) do
     case Keywords.save_keywords(file, conn.assigns.current_user) do
@@ -23,5 +31,14 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
           errors: [%{detail: "CSV Keywords count can't be more than 1000"}]
         )
     end
+  end
+
+  defp meta_data(pagination) do
+    %{
+      page: pagination.page,
+      pages: pagination.total_pages,
+      page_size: pagination.per_page,
+      records: pagination.total_count
+    }
   end
 end
