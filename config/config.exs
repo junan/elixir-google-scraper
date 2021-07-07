@@ -36,6 +36,8 @@ config :elixir_google_scraper, ExOauth2Provider,
   resource_owner: ElixirGoogleScraper.Account.Schemas.User,
   password_auth: {ElixirGoogleScraper.Account.Users, :authenticate}
 
+config :elixir_google_scraper, PhoenixOauth2Provider, current_resource_owner: :current_user
+
 config :jsonapi,
   field_transformation: :underscore,
   remove_links: true,

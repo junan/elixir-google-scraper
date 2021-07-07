@@ -8,6 +8,11 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
 
   import Ecto.Query
 
+  plug ExOauth2Provider.Plug.VerifyHeader, otp_app: :elixir_google_scraper, realm: "Bearer"
+
+  plug ExOauth2Provider.Plug.EnsureAuthenticated,
+    handler: ElixirGoogleScraperWeb.Api.ErrorHandler
+
   def create(conn, %{"file" => %Plug.Upload{} = file}) do
     user = User |> first() |> Repo.one()
 
