@@ -8,19 +8,10 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   describe "GET index/2" do
     test "returrns 201 status with list of keywords", %{conn: conn} do
       user = insert(:user)
-      attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       insert_list(2, :keyword, user: user)
+      target = Routes.api_v1_keyword_path(conn, :index)
 
-      {_, oauth_app} =
-        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
-
-      {_, acess_token} =
-        AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
-
-      conn =
-        conn
-        |> put_req_header("authorization", "Bearer " <> acess_token.token)
-        |> get(Routes.api_v1_keyword_path(conn, :index))
+      conn = authenticated_request(user, conn, target, :get)
 
       assert %{
                "data" => [
@@ -52,20 +43,12 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
     test "returrns only matched keywords when search params are present", %{conn: conn} do
       user = insert(:user)
-      attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       insert(:keyword, name: "Bangkok", user: user)
       insert(:keyword, name: "Phuket", user: user)
 
-      {_, oauth_app} =
-        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
+      target = Routes.api_v1_keyword_path(conn, :index)
 
-      {_, acess_token} =
-        AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
-
-      conn =
-        conn
-        |> put_req_header("authorization", "Bearer " <> acess_token.token)
-        |> get(Routes.api_v1_keyword_path(conn, :index, name: "Bangkok"))
+      conn = authenticated_request(user, conn, target, :get, %{name: "Bangkok"})
 
       assert %{
                "data" => [
@@ -113,19 +96,10 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
     test "returns 422 status with an error when keywords are empty", %{conn: conn} do
       user = insert(:user)
-      attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}
+      target = Routes.api_v1_keyword_path(conn, :create)
 
-      {_, oauth_app} =
-        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
-
-      {_, acess_token} =
-        AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
-
-      conn =
-        conn
-        |> put_req_header("authorization", "Bearer " <> acess_token.token)
-        |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
+      conn = authenticated_request(user, conn, target, :post, %{file: file})
 
       assert json_response(conn, 422) == %{
                "errors" => [%{"detail" => "File can't be empty"}]
@@ -134,19 +108,10 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
     test "returns 422 status with an error when keywords are more than 1000", %{conn: conn} do
       user = insert(:user)
-      attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/large_keywords.csv"}
+      target = Routes.api_v1_keyword_path(conn, :create)
 
-      {_, oauth_app} =
-        Applications.create_application(nil, attrs, otp_app: :elixir_google_scraper)
-
-      {_, acess_token} =
-        AccessTokens.create_token(user, %{application: oauth_app}, otp_app: :elixir_google_scraper)
-
-      conn =
-        conn
-        |> put_req_header("authorization", "Bearer " <> acess_token.token)
-        |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
+      conn = authenticated_request(user, conn, target, :post, %{file: file})
 
       assert json_response(conn, 422) == %{
                "errors" => [%{"detail" => "CSV Keywords count can't be more than 1000"}]
