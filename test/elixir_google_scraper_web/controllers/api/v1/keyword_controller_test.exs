@@ -5,6 +5,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 200 status with list of keywords", %{conn: conn} do
       user = insert(:user)
       insert_list(2, :keyword, user: user)
+      target = Routes.api_v1_keyword_path(conn, :index)
 
       conn =
         conn
@@ -99,6 +100,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 422 status with an error when keywords are empty", %{conn: conn} do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}
+      target = Routes.api_v1_keyword_path(conn, :create)
 
       conn =
         conn
@@ -113,6 +115,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 422 status with an error when keywords are more than 1000", %{conn: conn} do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/large_keywords.csv"}
+      target = Routes.api_v1_keyword_path(conn, :create)
 
       conn =
         conn
