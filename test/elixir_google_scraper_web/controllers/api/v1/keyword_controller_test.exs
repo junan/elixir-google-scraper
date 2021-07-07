@@ -72,6 +72,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 201 status with empty response body when the token is valid", %{conn: conn} do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
+      target = Routes.api_v1_keyword_path(conn, :create)
 
       conn =
         conn
