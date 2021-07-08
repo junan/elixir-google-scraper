@@ -3,8 +3,8 @@ defmodule ElixirGoogleScraperWeb.AuthHelperCase do
 
   import Plug.Conn
 
-  alias ExOauth2Provider.AccessTokens
   alias ElixirGoogleScraper.Account.Users
+  alias ExOauth2Provider.AccessTokens
   alias ExOauth2Provider.Applications
 
   def authenticated_api_conn(conn, user) do
