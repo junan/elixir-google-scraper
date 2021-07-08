@@ -8,7 +8,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
       conn =
         conn
-        |> authenticated_conn(user)
+        |> authenticated_api_conn(user)
         |> get(Routes.api_v1_keyword_path(conn, :index))
 
       assert %{
@@ -46,7 +46,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
       conn =
         conn
-        |> authenticated_conn(user)
+        |> authenticated_api_conn(user)
         |> get(Routes.api_v1_keyword_path(conn, :index), %{name: "Bangkok"})
 
       assert %{
@@ -75,7 +75,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
       conn =
         conn
-        |> authenticated_conn(user)
+        |> authenticated_api_conn(user)
         |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
 
       assert conn.status == 201
@@ -101,7 +101,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
       conn =
         conn
-        |> authenticated_conn(user)
+        |> authenticated_api_conn(user)
         |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
 
       assert json_response(conn, 422) == %{
@@ -115,7 +115,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
       conn =
         conn
-        |> authenticated_conn(user)
+        |> authenticated_api_conn(user)
         |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
 
       assert json_response(conn, 422) == %{
