@@ -68,7 +68,10 @@ defmodule ElixirGoogleScraper.MixProject do
       {:phoenix_pagination, "~> 0.7.0"},
       {:floki, "~> 0.31.0"},
       {:httpoison, "~> 1.8"},
-      {:faker, "~> 0.16", only: :test}
+      {:faker, "~> 0.16", only: :test},
+      {:ex_oauth2_provider, "~> 0.5.6"},
+      {:phoenix_oauth2_provider, "~> 0.5.1"},
+      {:jsonapi, "~> 1.3"}
     ]
   end
 
