@@ -1,6 +1,8 @@
 defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
+  import ElixirGoogleScraperWeb.Api.CurrentUserSetter
+
   alias ElixirGoogleScraper.Scraper.Keywords
   alias ElixirGoogleScraperWeb.V1.ErrorView
 
@@ -31,11 +33,5 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
           errors: [%{detail: "CSV Keywords count can't be more than 1000"}]
         )
     end
-  end
-
-  defp set_current_user(conn, _) do
-    token = ExOauth2Provider.Plug.current_access_token(conn)
-    conn = assign(conn, :current_user, token.resource_owner)
-    conn
   end
 end
