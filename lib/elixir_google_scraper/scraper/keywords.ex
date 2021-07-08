@@ -68,7 +68,7 @@ defmodule ElixirGoogleScraper.Scraper.Keywords do
     |> Repo.insert()
   end
 
-  def get_keyword(id) do
+  def get_keyword!(id) do
     Keyword
     |> preload(:search_result)
     |> Repo.get!(id)

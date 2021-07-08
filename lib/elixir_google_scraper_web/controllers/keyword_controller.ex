@@ -38,7 +38,7 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
   end
 
   def set_keyword(conn, _) do
-    keyword = Keywords.get_keyword(conn.params["id"] || conn.params["keyword_id"])
+    keyword = Keywords.get_keyword!(conn.params["id"] || conn.params["keyword_id"])
     conn = assign(conn, :keyword, keyword)
     conn
   end

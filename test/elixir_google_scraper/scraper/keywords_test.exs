@@ -66,13 +66,13 @@ defmodule ElixirGoogleScraper.Scraper.KeywordsTest do
     end
   end
 
-  describe "get_keyword/1" do
+  describe "get_keyword!/1" do
     test "returns the keyword with preloded search result when the ID is valid" do
       user = insert(:user)
       keyword = insert(:keyword, user: user)
       search_result = insert(:search_result, keyword: keyword)
 
-      result = Keywords.get_keyword(keyword.id)
+      result = Keywords.get_keyword!(keyword.id)
 
       assert result.id == keyword.id
       assert result.search_result.id == search_result.id
@@ -83,7 +83,7 @@ defmodule ElixirGoogleScraper.Scraper.KeywordsTest do
       keyword = insert(:keyword, user: user)
 
       assert_raise Ecto.NoResultsError, fn ->
-        Keywords.get_keyword(keyword.id + 1)
+        Keywords.get_keyword!(keyword.id + 1)
       end
     end
   end
