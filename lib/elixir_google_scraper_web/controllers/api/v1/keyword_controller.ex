@@ -1,7 +1,7 @@
 defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
-  import ElixirGoogleScraperWeb.Api.CurrentUserSetter
+  import ElixirGoogleScraperWeb.Api.Plug.CurrentUserSetter
 
   alias ElixirGoogleScraper.Scraper.Keywords
   alias ElixirGoogleScraperWeb.V1.ErrorView
