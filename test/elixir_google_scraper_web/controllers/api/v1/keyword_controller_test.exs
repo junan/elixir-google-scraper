@@ -1,9 +1,5 @@
 defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   use ElixirGoogleScraperWeb.ConnCase, async: true
-  use ElixirGoogleScraperWeb.ApiCase, async: true
-
-  alias ExOauth2Provider.AccessTokens
-  alias ExOauth2Provider.Applications
 
   describe "GET index/2" do
     test "returns 200 status with list of keywords", %{conn: conn} do

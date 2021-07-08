@@ -29,6 +29,7 @@ defmodule ElixirGoogleScraperWeb.ConnCase do
       import Phoenix.ConnTest
       import ElixirGoogleScraperWeb.ConnCase
       import ElixirGoogleScraper.Factory
+      import ElixirGoogleScraperWeb.AuthHelperCase
 
       alias ElixirGoogleScraperWeb.Router.Helpers, as: Routes
 
