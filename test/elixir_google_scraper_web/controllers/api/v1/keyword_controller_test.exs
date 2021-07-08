@@ -5,7 +5,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   alias ExOauth2Provider.Applications
 
   describe "POST create/2" do
-    test "returrns 201 status with empty response body when the token is valid", %{conn: conn} do
+    test "returns 201 status with empty response body when the token is valid", %{conn: conn} do
       user = insert(:user)
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
@@ -24,7 +24,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
       assert conn.resp_body == ""
     end
 
-    test "returrns 401 status with an error when the token is invalid", %{conn: conn} do
+    test "returns 401 status with an error when the token is invalid", %{conn: conn} do
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
 
       conn =
@@ -37,7 +37,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
              }
     end
 
-    test "returrns 422 status with an error when keywords are empty", %{conn: conn} do
+    test "returns 422 status with an error when keywords are empty", %{conn: conn} do
       user = insert(:user)
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}
@@ -53,11 +53,11 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
         |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
 
       assert json_response(conn, 422) == %{
-               "errors" => [%{"detail" => "File cant be empty"}]
+               "errors" => [%{"detail" => "File can't be empty"}]
              }
     end
 
-    test "returrns 422 status with an error when keywords are more than 1000", %{conn: conn} do
+    test "returns 422 status with an error when keywords are more than 1000", %{conn: conn} do
       user = insert(:user)
       attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/large_keywords.csv"}

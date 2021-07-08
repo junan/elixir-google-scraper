@@ -22,7 +22,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
       {:error, :file_is_empty} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(ErrorView, "error.json", errors: [%{detail: "File cant be empty"}])
+        |> render(ErrorView, "error.json", errors: [%{detail: "File can't be empty"}])
 
       {:error, :keyword_list_exceeded} ->
         conn
