@@ -9,9 +9,11 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 200 status with list of keywords", %{conn: conn} do
       user = insert(:user)
       insert_list(2, :keyword, user: user)
-      target = Routes.api_v1_keyword_path(conn, :index)
 
-      conn = authenticated_request(user, conn, target, :get)
+      conn =
+        conn
+        |> authenticated_conn(user)
+        |> get(Routes.api_v1_keyword_path(conn, :index))
 
       assert %{
                "data" => [
@@ -46,9 +48,10 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
       insert(:keyword, name: "Bangkok", user: user)
       insert(:keyword, name: "Phuket", user: user)
 
-      target = Routes.api_v1_keyword_path(conn, :index)
-
-      conn = authenticated_request(user, conn, target, :get, %{name: "Bangkok"})
+      conn =
+        conn
+        |> authenticated_conn(user)
+        |> get(Routes.api_v1_keyword_path(conn, :index), %{name: "Bangkok"})
 
       assert %{
                "data" => [
@@ -73,9 +76,11 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 201 status with empty response body when the token is valid", %{conn: conn} do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
-      target = Routes.api_v1_keyword_path(conn, :create)
 
-      conn = authenticated_request(user, conn, target, :post, %{file: file})
+      conn =
+        conn
+        |> authenticated_conn(user)
+        |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
 
       assert conn.status == 201
       assert conn.resp_body == ""
@@ -97,9 +102,11 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 422 status with an error when keywords are empty", %{conn: conn} do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}
-      target = Routes.api_v1_keyword_path(conn, :create)
 
-      conn = authenticated_request(user, conn, target, :post, %{file: file})
+      conn =
+        conn
+        |> authenticated_conn(user)
+        |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
 
       assert json_response(conn, 422) == %{
                "errors" => [%{"detail" => "File can't be empty"}]
@@ -109,9 +116,11 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 422 status with an error when keywords are more than 1000", %{conn: conn} do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/large_keywords.csv"}
-      target = Routes.api_v1_keyword_path(conn, :create)
 
-      conn = authenticated_request(user, conn, target, :post, %{file: file})
+      conn =
+        conn
+        |> authenticated_conn(user)
+        |> post(Routes.api_v1_keyword_path(conn, :create), %{file: file})
 
       assert json_response(conn, 422) == %{
                "errors" => [%{"detail" => "CSV Keywords count can't be more than 1000"}]

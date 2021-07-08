@@ -6,7 +6,7 @@ defmodule ElixirGoogleScraperWeb.ApiCase do
       alias ExOauth2Provider.AccessTokens
       alias ExOauth2Provider.Applications
 
-      def authenticated_request(user, conn, target, type, params \\ %{}) do
+      def authenticated_conn(conn, user) do
         attrs = %{name: "Application", redirect_uri: "https://example.org/endpoint"}
 
         {_, oauth_app} =
@@ -19,13 +19,7 @@ defmodule ElixirGoogleScraperWeb.ApiCase do
             otp_app: :elixir_google_scraper
           )
 
-        conn = put_req_header(conn, "authorization", "Bearer " <> access_token.token)
-
-        if type == :post do
-          post(conn, target, params)
-        else
-          get(conn, target, params)
-        end
+        put_req_header(conn, "authorization", "Bearer " <> access_token.token)
       end
     end
   end
