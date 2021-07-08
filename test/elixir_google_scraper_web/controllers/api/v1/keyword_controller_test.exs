@@ -5,7 +5,6 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 200 status with list of keywords", %{conn: conn} do
       user = insert(:user)
       insert_list(2, :keyword, user: user)
-      target = Routes.api_v1_keyword_path(conn, :index)
 
       conn =
         conn
@@ -73,7 +72,6 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 201 status with empty response body when the token is valid", %{conn: conn} do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/keywords.csv"}
-      target = Routes.api_v1_keyword_path(conn, :create)
 
       conn =
         conn
@@ -100,7 +98,6 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 422 status with an error when keywords are empty", %{conn: conn} do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/empty_keywords.csv"}
-      target = Routes.api_v1_keyword_path(conn, :create)
 
       conn =
         conn
@@ -115,7 +112,6 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
     test "returns 422 status with an error when keywords are more than 1000", %{conn: conn} do
       user = insert(:user)
       file = %Plug.Upload{content_type: "text/csv", path: "test/fixture/large_keywords.csv"}
-      target = Routes.api_v1_keyword_path(conn, :create)
 
       conn =
         conn
@@ -133,9 +129,11 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
       user = insert(:user)
       keyword = insert(:keyword, user: user)
       insert(:search_result, keyword: keyword)
-      target = Routes.api_v1_keyword_path(conn, :show, keyword.id)
 
-      conn = authenticated_request(user, conn, target, :get)
+      conn =
+        conn
+        |> authenticated_conn(user)
+        |> get(Routes.api_v1_keyword_path(conn, :show, keyword.id))
 
       assert %{
                "data" => %{
@@ -159,9 +157,11 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
     test "returrns 404 status with an error message", %{conn: conn} do
       user = insert(:user)
-      target = Routes.api_v1_keyword_path(conn, :show, 1000)
 
-      conn = authenticated_request(user, conn, target, :get)
+      conn =
+        conn
+        |> authenticated_conn(user)
+        |> get(Routes.api_v1_keyword_path(conn, :show, 1000))
 
       assert %{
                "errors" => [%{"detail" => "Keyword not found"}]
