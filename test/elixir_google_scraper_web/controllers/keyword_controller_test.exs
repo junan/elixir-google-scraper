@@ -79,15 +79,14 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
       assert %Keyword{id: ^keyword_id} = conn.assigns[:keyword]
     end
 
-    test "redirects to the keywords dashboard page if the keyword is not found", %{conn: conn} do
+    test "renders 404 error page if the keyword is not found", %{conn: conn} do
       user = insert(:user)
 
-      conn =
+      assert_error_sent(404, fn ->
         conn
         |> log_in_user(user)
         |> get(Routes.keyword_path(conn, :show, 100))
-
-      assert redirected_to(conn) == "/keywords"
+      end)
     end
   end
 
@@ -119,15 +118,14 @@ defmodule ElixirGoogleScraperWeb.KeywordControllerTest do
       assert %Keyword{id: ^keyword_id} = conn.assigns[:keyword]
     end
 
-    test "redirects to the keywords dashboaad page if the keyword is not found", %{conn: conn} do
+    test "renders 404 error page if the keyword is not found", %{conn: conn} do
       user = insert(:user)
 
-      conn =
+      assert_error_sent(404, fn ->
         conn
         |> log_in_user(user)
         |> get(Routes.keyword_html_path(conn, :html, 100))
-
-      assert redirected_to(conn) == "/keywords"
+      end)
     end
   end
 end
