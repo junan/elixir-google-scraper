@@ -49,13 +49,13 @@ defmodule ElixirGoogleScraper.UsersTest do
   end
 
   describe "authenticate/2" do
-    test "authenticates successfully when the credentialsare valid" do
+    test "returns {:ok, user} when the credentials are valid" do
       user = insert(:user)
 
       assert {:ok, user} == Users.authenticate(user.email, "secret-password")
     end
 
-    test "authenticates unsuccessfully when the credential are invalid" do
+    test "returns {:error, :invalid_password} when the credentials are invalid" do
       user = insert(:user)
 
       assert {:error, :invalid_password} == Users.authenticate(user.email, "invalid-password")
@@ -158,7 +158,8 @@ defmodule ElixirGoogleScraper.UsersTest do
     test "validates maximum value for email for security", %{user: user} do
       too_long = String.duplicate("db", 100)
 
-      {:error, changeset} = Users.apply_user_email(user, valid_user_password(), %{email: too_long})
+      {:error, changeset} =
+        Users.apply_user_email(user, valid_user_password(), %{email: too_long})
 
       assert "should be at most 160 character(s)" in errors_on(changeset).email
     end
