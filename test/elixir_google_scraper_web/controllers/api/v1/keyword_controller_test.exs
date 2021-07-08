@@ -6,7 +6,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   alias ExOauth2Provider.Applications
 
   describe "GET index/2" do
-    test "returrns 200 status with list of keywords", %{conn: conn} do
+    test "returns 200 status with list of keywords", %{conn: conn} do
       user = insert(:user)
       insert_list(2, :keyword, user: user)
       target = Routes.api_v1_keyword_path(conn, :index)
@@ -41,7 +41,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
              } = json_response(conn, 200)
     end
 
-    test "returrns only matched keywords when search param is present", %{conn: conn} do
+    test "returns only matched keywords when given search param", %{conn: conn} do
       user = insert(:user)
       insert(:keyword, name: "Bangkok", user: user)
       insert(:keyword, name: "Phuket", user: user)
