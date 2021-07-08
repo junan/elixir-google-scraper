@@ -6,8 +6,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
   alias ElixirGoogleScraperWeb.V1.KeywordView
 
   def index(conn, params) do
-    token = ExOauth2Provider.Plug.current_access_token(conn)
-    {keywords, pagination} = Keywords.paginated_user_keywords(token.resource_owner, params)
+    {keywords, pagination} = Keywords.paginated_user_keywords(conn.assigns.current_user, params)
 
     render(conn, KeywordView, "index.json", %{data: keywords, meta: meta_data(pagination)})
   end
