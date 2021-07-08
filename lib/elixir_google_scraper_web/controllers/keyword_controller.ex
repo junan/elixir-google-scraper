@@ -3,8 +3,6 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
 
   alias ElixirGoogleScraper.Scraper.Keywords
 
-  plug(:set_keyword when action in [:show, :html])
-
   def index(conn, params) do
     {keywords, pagination} = Keywords.paginated_user_keywords(conn.assigns[:current_user], params)
 
@@ -29,17 +27,15 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
     |> redirect(to: Routes.keyword_path(conn, :index))
   end
 
-  def show(conn, _) do
-    render(conn, "show.html", keyword: conn.assigns[:keyword])
+  def show(conn, %{"id" => id}) do
+    keyword = Keywords.get_keyword!(id)
+
+    render(conn, "show.html", keyword: keyword)
   end
 
-  def html(conn, _) do
-    render(conn, "html_response.html", keyword: conn.assigns[:keyword])
-  end
+  def html(conn, %{"keyword_id" => keyword_id}) do
+    keyword = Keywords.get_keyword!(keyword_id)
 
-  def set_keyword(conn, _) do
-    keyword = Keywords.get_keyword!(conn.params["id"] || conn.params["keyword_id"])
-    conn = assign(conn, :keyword, keyword)
-    conn
+    render(conn, "html_response.html", keyword: keyword)
   end
 end
