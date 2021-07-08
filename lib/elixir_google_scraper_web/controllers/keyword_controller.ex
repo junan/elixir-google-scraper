@@ -2,8 +2,9 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
   alias ElixirGoogleScraper.Scraper.Keywords
+  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
 
-  plug(:redirect_to_dashboard_if_no_keyword when action in [:show, :html])
+  plug(:set_keyword when action in [:show, :html])
 
   def index(conn, params) do
     {keywords, pagination} = Keywords.paginated_user_keywords(conn.assigns[:current_user], params)
@@ -37,17 +38,9 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
     render(conn, "html_response.html", keyword: conn.assigns[:keyword])
   end
 
-  def redirect_to_dashboard_if_no_keyword(conn, _) do
+  def set_keyword(conn, _) do
     keyword = Keywords.get_keyword(conn.params["id"] || conn.params["keyword_id"])
-
-    if keyword == nil do
-      conn
-      |> redirect(to: "/keywords")
-      |> halt()
-    else
-      # Assigning keyword to the connection so that we dont have to search it again later
-      conn = assign(conn, :keyword, keyword)
-      conn
-    end
+    conn = assign(conn, :keyword, keyword)
+    conn
   end
 end
