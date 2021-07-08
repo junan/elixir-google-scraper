@@ -2,7 +2,6 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
   alias ElixirGoogleScraper.Scraper.Keywords
-  alias ElixirGoogleScraper.Scraper.Schemas.Keyword
 
   plug(:set_keyword when action in [:show, :html])
 

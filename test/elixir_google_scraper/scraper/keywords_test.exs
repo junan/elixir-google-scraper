@@ -78,7 +78,7 @@ defmodule ElixirGoogleScraper.Scraper.KeywordsTest do
       assert result.search_result.id == search_result.id
     end
 
-    test "raises Ecto.NoResultsError exception when the ID is invalid" do
+    test "raises an Ecto.NoResultsError exception when the ID is invalid" do
       user = insert(:user)
       keyword = insert(:keyword, user: user)
 
