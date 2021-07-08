@@ -10,10 +10,10 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
     handler: ElixirGoogleScraperWeb.Api.ErrorHandler
   )
 
-  def create(conn, %{"file" => %Plug.Upload{} = file}) do
-    token = ExOauth2Provider.Plug.current_access_token(conn)
+  plug(:set_current_user)
 
-    case Keywords.save_keywords(file, token.resource_owner) do
+  def create(conn, %{"file" => %Plug.Upload{} = file}) do
+    case Keywords.save_keywords(file, conn.assigns.current_user) do
       :ok ->
         conn
         |> put_resp_header("content-type", "application/json")
@@ -31,5 +31,11 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
           errors: [%{detail: "CSV Keywords count can't be more than 1000"}]
         )
     end
+  end
+
+  defp set_current_user(conn, _) do
+    token = ExOauth2Provider.Plug.current_access_token(conn)
+    conn = assign(conn, :current_user, token.resource_owner)
+    conn
   end
 end
