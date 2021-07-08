@@ -5,7 +5,8 @@ defmodule ElixirGoogleScraperWeb.ErrorViewTest do
   import Phoenix.View
 
   test "renders 404.html" do
-    assert render_to_string(ElixirGoogleScraperWeb.ErrorView, "404.html", []) == "Not Found"
+    assert render_to_string(ElixirGoogleScraperWeb.ErrorView, "404.html", []) =~
+             "The page you are looking for was not found."
   end
 
   test "renders 500.html" do

@@ -68,6 +68,12 @@ defmodule ElixirGoogleScraper.Scraper.Keywords do
     |> Repo.insert()
   end
 
+  def get_keyword!(id) do
+    Keyword
+    |> preload(:search_result)
+    |> Repo.get!(id)
+  end
+
   defp user_keywords_query(user) do
     where(Keyword, [k], k.user_id == ^user.id)
   end

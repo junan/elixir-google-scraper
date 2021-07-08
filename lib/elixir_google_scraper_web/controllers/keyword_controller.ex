@@ -26,4 +26,16 @@ defmodule ElixirGoogleScraperWeb.KeywordController do
     |> put_flash(flash_type, flash_message)
     |> redirect(to: Routes.keyword_path(conn, :index))
   end
+
+  def show(conn, %{"id" => id}) do
+    keyword = Keywords.get_keyword!(id)
+
+    render(conn, "show.html", keyword: keyword)
+  end
+
+  def html(conn, %{"keyword_id" => keyword_id}) do
+    keyword = Keywords.get_keyword!(keyword_id)
+
+    render(conn, "html_response.html", keyword: keyword)
+  end
 end
