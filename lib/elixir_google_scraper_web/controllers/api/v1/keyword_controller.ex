@@ -1,18 +1,8 @@
 defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
   use ElixirGoogleScraperWeb, :controller
 
-  import ElixirGoogleScraperWeb.Api.Plug.CurrentUserSetter
-
   alias ElixirGoogleScraper.Scraper.Keywords
   alias ElixirGoogleScraperWeb.V1.ErrorView
-
-  plug(ExOauth2Provider.Plug.VerifyHeader, otp_app: :elixir_google_scraper, realm: "Bearer")
-
-  plug(ExOauth2Provider.Plug.EnsureAuthenticated,
-    handler: ElixirGoogleScraperWeb.Api.ErrorHandler
-  )
-
-  plug(:set_current_user)
 
   def create(conn, %{"file" => %Plug.Upload{} = file}) do
     case Keywords.save_keywords(file, conn.assigns.current_user) do

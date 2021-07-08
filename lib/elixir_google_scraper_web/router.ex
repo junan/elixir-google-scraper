@@ -2,6 +2,7 @@ defmodule ElixirGoogleScraperWeb.Router do
   use ElixirGoogleScraperWeb, :router
   use PhoenixOauth2Provider.Router, otp_app: :elixir_google_scraper
 
+  import ElixirGoogleScraperWeb.Api.Plug.CurrentUserSetter
   import ElixirGoogleScraperWeb.UserAuth
 
   pipeline :browser do
@@ -16,11 +17,25 @@ defmodule ElixirGoogleScraperWeb.Router do
   # coveralls-ignore-start
   pipeline :api do
     plug(:accepts, ["json"])
+  end
 
-    scope "/api/v1", ElixirGoogleScraperWeb, as: :api_v1 do
-      post("/oauth/token", Api.V1.TokenController, :create)
-      resources("/keywords", Api.V1.KeywordController, only: [:create])
-    end
+  pipeline :api_auth do
+    plug(ExOauth2Provider.Plug.VerifyHeader, otp_app: :elixir_google_scraper, realm: "Bearer")
+
+    plug(ExOauth2Provider.Plug.EnsureAuthenticated,
+      handler: ElixirGoogleScraperWeb.Api.ErrorHandler
+    )
+
+    plug(:set_current_user)
+  end
+
+  scope "/api/v1", ElixirGoogleScraperWeb, as: :api_v1 do
+    pipe_through(:api)
+
+    post("/oauth/token", Api.V1.TokenController, :create)
+
+    pipe_through(:api_auth)
+    resources("/keywords", Api.V1.KeywordController, only: [:create])
   end
 
   scope "/" do
