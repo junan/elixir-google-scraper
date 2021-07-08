@@ -125,7 +125,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   end
 
   describe "GET show/2" do
-    test "returrns 200 status with details keyword search result", %{conn: conn} do
+    test "returns 200 status with details keyword search result", %{conn: conn} do
       user = insert(:user)
       keyword = insert(:keyword, user: user)
       insert(:search_result, keyword: keyword)
@@ -155,7 +155,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
              } = json_response(conn, 200)
     end
 
-    test "returrns 404 status with an error message", %{conn: conn} do
+    test "returns 404 status with an error message", %{conn: conn} do
       user = insert(:user)
 
       conn =

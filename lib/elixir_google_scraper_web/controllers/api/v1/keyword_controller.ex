@@ -12,13 +12,6 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
     render(conn, KeywordView, "index.json", %{data: keywords, meta: meta_data(pagination)})
   end
 
-  def index(conn, params) do
-    token = ExOauth2Provider.Plug.current_access_token(conn)
-    {keywords, pagination} = Keywords.paginated_user_keywords(token.resource_owner, params)
-
-    render(conn, KeywordView, "index.json", %{data: keywords, meta: meta_data(pagination)})
-  end
-
   def create(conn, %{"file" => %Plug.Upload{} = file}) do
     case Keywords.save_keywords(file, conn.assigns.current_user) do
       :ok ->
