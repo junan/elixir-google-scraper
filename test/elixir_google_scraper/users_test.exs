@@ -158,8 +158,7 @@ defmodule ElixirGoogleScraper.UsersTest do
     test "validates maximum value for email for security", %{user: user} do
       too_long = String.duplicate("db", 100)
 
-      {:error, changeset} =
-        Users.apply_user_email(user, valid_user_password(), %{email: too_long})
+      {:error, changeset} = Users.apply_user_email(user, valid_user_password(), %{email: too_long})
 
       assert "should be at most 160 character(s)" in errors_on(changeset).email
     end
