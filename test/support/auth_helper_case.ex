@@ -1,6 +1,4 @@
 defmodule ElixirGoogleScraperWeb.AuthHelperCase do
-  use ExUnit.CaseTemplate
-
   import Plug.Conn
 
   alias ElixirGoogleScraper.Account.Users
