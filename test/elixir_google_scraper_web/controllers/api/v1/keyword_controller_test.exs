@@ -123,4 +123,68 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
              }
     end
   end
+
+  describe "GET show/2" do
+    test "returns 200 status with details keyword search result when the given keyword belongs to the current user",
+         %{conn: conn} do
+      user = insert(:user)
+      keyword = insert(:keyword, user: user)
+      insert(:search_result, keyword: keyword)
+
+      conn =
+        conn
+        |> authenticated_api_conn(user)
+        |> get(Routes.api_v1_keyword_path(conn, :show, keyword.id))
+
+      assert %{
+               "data" => %{
+                 "attributes" => %{
+                   "top_ads_count" => _,
+                   "top_ads_urls" => _,
+                   "total_ads_count" => _,
+                   "result_count" => _,
+                   "result_urls" => _,
+                   "total_links_count" => _,
+                   "html" => _,
+                   "inserted_at" => _
+                 },
+                 "id" => _,
+                 "relationships" => %{},
+                 "type" => "keyword_search_result"
+               },
+               "included" => []
+             } = json_response(conn, 200)
+    end
+
+    test "returns 404 status with an error message when the given keyword does not belong to the current user",
+         %{conn: conn} do
+      user = insert(:user)
+      user2 = insert(:user)
+      keyword = insert(:keyword, user: user2)
+      insert(:search_result, keyword: keyword)
+
+      conn =
+        conn
+        |> authenticated_api_conn(user)
+        |> get(Routes.api_v1_keyword_path(conn, :show, keyword.id))
+
+      assert %{
+               "errors" => [%{"detail" => "Keyword not found"}]
+             } == json_response(conn, 404)
+    end
+
+    test "returns 404 status with an error message when the given keyword does not exist",
+         %{conn: conn} do
+      user = insert(:user)
+
+      conn =
+        conn
+        |> authenticated_api_conn(user)
+        |> get(Routes.api_v1_keyword_path(conn, :show, 1000))
+
+      assert %{
+               "errors" => [%{"detail" => "Keyword not found"}]
+             } == json_response(conn, 404)
+    end
+  end
 end

@@ -35,7 +35,7 @@ defmodule ElixirGoogleScraperWeb.Router do
     post("/oauth/token", Api.V1.TokenController, :create)
 
     pipe_through(:api_auth)
-    resources("/keywords", Api.V1.KeywordController, only: [:create, :index])
+    resources("/keywords", Api.V1.KeywordController, only: [:create, :index, :show])
   end
 
   scope "/" do
