@@ -1,6 +1,8 @@
 defmodule ElixirGoogleScraperWeb.Router do
   use ElixirGoogleScraperWeb, :router
+  use PhoenixOauth2Provider.Router, otp_app: :elixir_google_scraper
 
+  import ElixirGoogleScraperWeb.Api.Plug.CurrentUserSetter
   import ElixirGoogleScraperWeb.UserAuth
 
   pipeline :browser do
@@ -17,10 +19,35 @@ defmodule ElixirGoogleScraperWeb.Router do
     plug(:accepts, ["json"])
   end
 
+  pipeline :api_auth do
+    plug(ExOauth2Provider.Plug.VerifyHeader, otp_app: :elixir_google_scraper, realm: "Bearer")
+
+    plug(ExOauth2Provider.Plug.EnsureAuthenticated,
+      handler: ElixirGoogleScraperWeb.Api.ErrorHandler
+    )
+
+    plug(:set_current_user)
+  end
+
+  scope "/api/v1", ElixirGoogleScraperWeb, as: :api_v1 do
+    pipe_through(:api)
+
+    post("/oauth/token", Api.V1.TokenController, :create)
+
+    pipe_through(:api_auth)
+    resources("/keywords", Api.V1.KeywordController, only: [:create, :index, :show])
+  end
+
+  scope "/" do
+    pipe_through([:browser, :require_authenticated_user])
+
+    oauth_routes()
+  end
+
   # coveralls-ignore-stop
 
   scope "/", ElixirGoogleScraperWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
     get("/", PageController, :index)
   end
@@ -69,8 +96,9 @@ defmodule ElixirGoogleScraperWeb.Router do
     get("/users/settings", UserSettingsController, :edit)
     put("/users/settings", UserSettingsController, :update)
 
-    get("/keywords", KeywordController, :index)
-    post("/keywords", KeywordController, :create)
+    resources "/keywords", KeywordController, only: [:index, :create, :show] do
+      get("/html_response", KeywordController, :html, as: :html)
+    end
   end
 
   scope "/", ElixirGoogleScraperWeb do

@@ -2,7 +2,8 @@ defmodule ElixirGoogleScraperWeb.UserResetPasswordControllerTest do
   use ElixirGoogleScraperWeb.ConnCase, async: true
 
   import ElixirGoogleScraper.AccountsFixtures
-  alias ElixirGoogleScraper.Accounts
+  alias ElixirGoogleScraper.Account.Schemas.UserToken
+  alias ElixirGoogleScraper.Account.Users
   alias ElixirGoogleScraper.Repo
 
   setup do
@@ -27,7 +28,7 @@ defmodule ElixirGoogleScraperWeb.UserResetPasswordControllerTest do
 
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "If your email is in our system"
-      assert Repo.get_by!(Accounts.UserToken, user_id: user.id).context == "reset_password"
+      assert Repo.get_by!(UserToken, user_id: user.id).context == "reset_password"
     end
 
     test "does not send reset password token if email is invalid", %{conn: conn} do
@@ -38,7 +39,7 @@ defmodule ElixirGoogleScraperWeb.UserResetPasswordControllerTest do
 
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "If your email is in our system"
-      assert Repo.all(Accounts.UserToken) == []
+      assert Repo.all(UserToken) == []
     end
   end
 
@@ -46,7 +47,7 @@ defmodule ElixirGoogleScraperWeb.UserResetPasswordControllerTest do
     setup %{user: user} do
       token =
         extract_user_token(fn url ->
-          Accounts.deliver_user_reset_password_instructions(user, url)
+          Users.deliver_user_reset_password_instructions(user, url)
         end)
 
       %{token: token}
@@ -68,7 +69,7 @@ defmodule ElixirGoogleScraperWeb.UserResetPasswordControllerTest do
     setup %{user: user} do
       token =
         extract_user_token(fn url ->
-          Accounts.deliver_user_reset_password_instructions(user, url)
+          Users.deliver_user_reset_password_instructions(user, url)
         end)
 
       %{token: token}
@@ -86,7 +87,7 @@ defmodule ElixirGoogleScraperWeb.UserResetPasswordControllerTest do
       assert redirected_to(conn) == Routes.user_session_path(conn, :new)
       refute get_session(conn, :user_token)
       assert get_flash(conn, :info) =~ "Password reset successfully"
-      assert Accounts.get_user_by_email_and_password(user.email, "new valid password")
+      assert Users.get_user_by_email_and_password(user.email, "new valid password")
     end
 
     test "does not reset password on invalid data", %{conn: conn, token: token} do
