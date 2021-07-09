@@ -34,7 +34,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordController do
   end
 
   def show(conn, %{"id" => id}) do
-    keyword = Keywords.get_keyword(id)
+    keyword = Keywords.get_keyword!(id)
 
     if keyword do
       render(conn, KeywordSearchResultView, "show.json", %{data: keyword.search_result})

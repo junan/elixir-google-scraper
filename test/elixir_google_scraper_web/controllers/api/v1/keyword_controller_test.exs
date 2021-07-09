@@ -132,7 +132,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
       conn =
         conn
-        |> authenticated_conn(user)
+        |> authenticated_api_conn(user)
         |> get(Routes.api_v1_keyword_path(conn, :show, keyword.id))
 
       assert %{
@@ -160,7 +160,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
 
       conn =
         conn
-        |> authenticated_conn(user)
+        |> authenticated_api_conn(user)
         |> get(Routes.api_v1_keyword_path(conn, :show, 1000))
 
       assert %{
