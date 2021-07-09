@@ -16,6 +16,13 @@ defmodule ElixirGoogleScraper.Scraper.Keywords do
     |> Repo.paginate(params)
   end
 
+  def get_user_keyword(user, id) do
+    user
+    |> user_keywords_query
+    |> preload(:search_result)
+    |> Repo.get(id)
+  end
+
   def save_keywords(file, %User{} = user) do
     case CSVKeyword.validate(file) do
       {:ok, keyword_list} ->
