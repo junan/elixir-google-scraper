@@ -114,7 +114,7 @@ defmodule ElixirGoogleScraper.Scraper.KeywordsTest do
     test "returns nil when the given keyword does not exist" do
       user = insert(:user)
 
-      result = Keywords.get_user_keyword(user2, 1000)
+      result = Keywords.get_user_keyword(user, 1000)
 
       assert result == nil
     end
