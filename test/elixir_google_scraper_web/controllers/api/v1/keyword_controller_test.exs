@@ -125,7 +125,7 @@ defmodule ElixirGoogleScraperWeb.Api.V1.KeywordControllerTest do
   end
 
   describe "GET show/2" do
-    test "returns 200 status with details keyword search result when the given keyword does belong to the current user",
+    test "returns 200 status with details keyword search result when the given keyword belongs to the current user",
          %{conn: conn} do
       user = insert(:user)
       keyword = insert(:keyword, user: user)

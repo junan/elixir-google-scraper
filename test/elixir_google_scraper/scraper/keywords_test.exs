@@ -89,7 +89,7 @@ defmodule ElixirGoogleScraper.Scraper.KeywordsTest do
   end
 
   describe "get_user_keyword/2" do
-    test "returns the keyword with preloded search result when the given keyword does belong to the user" do
+    test "returns the keyword with preloded search result when the given keyword belongs to the user" do
       user = insert(:user)
       keyword = insert(:keyword, user: user)
       search_result = insert(:search_result, keyword: keyword)
