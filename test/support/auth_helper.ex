@@ -1,4 +1,4 @@
-defmodule ElixirGoogleScraperWeb.AuthHelperCase do
+defmodule ElixirGoogleScraperWeb.AuthHelper do
   import Plug.Conn
 
   alias ElixirGoogleScraper.Account.Users
